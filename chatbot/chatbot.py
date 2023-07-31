@@ -5,6 +5,7 @@ palm.configure(api_key="AIzaSyDUoEjt1TuSBUqkH8YYL30rnQZQGvvPJbg")
 
 class ai_resource:
   defaults_qa = {
+    
     'model': 'models/chat-bison-001',
     'temperature': 0.3,
     'candidate_count': 1,
@@ -295,14 +296,10 @@ mode = "DMC"
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6 import uic
-from design_python import Ui_MainWindow
-from PyQt6.QtGui import QIcon
+#from design_python import Ui_MainWindow
+from PyQt6.QtCore import QTimer
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType("C:\Programming\python\chatbot\design.ui")
-#WINDOW_ICON_PATH = "C:\Programming\python\chatbot\icons\icons8-chat-48.png"
-HOME_ICON_PATH = "C:\Programming\python\chatbot\icons\icons8-home-48.png"
-SETTINGS_ICON_PATH = "C:\Programming\python\chatbot\icons\icons8-settings-48.png"
-SEND_ICON_PATH = "C:\Programming\python\chatbot\icons\icons8-send-48.png"
 
 class Window(QMainWindow):
   def __init__(self):
@@ -311,27 +308,21 @@ class Window(QMainWindow):
     self.ui = Ui_MainWindow()
     self.ui.setupUi(self)
 
-    icon1 = QIcon(HOME_ICON_PATH)
-    self.ui.home_btn.setIcon(icon1)
-
-    icon2 = QIcon(SETTINGS_ICON_PATH)
-    self.ui.settings_btn.setIcon(icon2)
-
-    icon3 = QIcon(SEND_ICON_PATH)
-    self.ui.pushButton.setIcon(icon3)
-
     self.ui.pushButton.clicked.connect(self.send)
 
     self.ui.main_text.setPlaceholderText("Current mode is: {0}".format(mode))
     self.ui.menu_btn.currentIndexChanged.connect(self.mode_select)
 
   def send(self):
+    human_text = "You: " + self.ui.user_input.text()
+    html = f'<body><h1 style="color: rgb(0, 170, 0); background-color: ; border: 3px solid white; border-radius: 0px;">{human_text}</h1></body><br>'
+    self.ui.main_text.insertHtml(html)
+    QTimer.singleShot(100, self.ai_send)
+  
+  def ai_send(self):
     human_text = self.ui.user_input.text()
-    new_human_text = "You: "+ self.ui.user_input.text()
     self.ui.user_input.clear()
-    self.ui.main_text.append(new_human_text)
-
-    if (mode=="Question Answer" or mode=="Mode"):
+    if (mode=="Question Answer"):
       defaults = ai_resource.defaults_qa
       context = ai_resource.context_qa
       examples = ai_resource.examples_qa
@@ -363,15 +354,16 @@ class Window(QMainWindow):
       )
 
     if (mode=="DMC"):
-      ai_text = "DMC: " + response.result + "\n"
+      ai_text = "DMC: " + response.result
     elif (mode=="Question Answer"):
-      ai_text = "ChatBot: " + response.last + "\n"
+      ai_text = "ChatBot: " + response.last
     elif (mode=="Friend"):
-      ai_text = "Friend: " + response.last + "\n"
+      ai_text = "Friend: " + response.last
     elif (mode=="Doctor"):
-      ai_text = "Doctor: " + response.last + "\n"
+      ai_text = "Doctor: " + response.last
     
-    self.ui.main_text.append(ai_text)
+    html = f"<h1 style='color: rgb(0, 255, 0); background-color: ; border: 3px solid white; border-radius: 15px;'>{ai_text}</h1><br>"
+    self.ui.main_text.insertHtml(html)
   
   def mode_select(self):
     global mode
