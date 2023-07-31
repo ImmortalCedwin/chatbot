@@ -308,14 +308,14 @@ class Window(QMainWindow):
     self.ui = Ui_MainWindow()
     self.ui.setupUi(self)
 
-    self.ui.pushButton.clicked.connect(self.send)
+    self.ui.send.clicked.connect(self.send)
 
     self.ui.main_text.setPlaceholderText("Current mode is: {0}".format(mode))
     self.ui.menu_btn.currentIndexChanged.connect(self.mode_select)
 
   def send(self):
     human_text = "You: " + self.ui.user_input.text()
-    html = f'<body><h1 style="color: rgb(0, 170, 0); background-color: ; border: 3px solid white; border-radius: 0px;">{human_text}</h1></body><br>'
+    html = f'<h1 align="right" style="color: rgb(0, 170, 0); ">{human_text}</h1><br>'
     self.ui.main_text.insertHtml(html)
     QTimer.singleShot(100, self.ai_send)
   
@@ -362,7 +362,7 @@ class Window(QMainWindow):
     elif (mode=="Doctor"):
       ai_text = "Doctor: " + response.last
     
-    html = f"<h1 style='color: rgb(0, 255, 0); background-color: ; border: 3px solid white; border-radius: 15px;'>{ai_text}</h1><br>"
+    html = f'<h1 align="left" style="color: rgb(0, 255, 0);">{ai_text}</h1><br>'
     self.ui.main_text.insertHtml(html)
   
   def mode_select(self):
