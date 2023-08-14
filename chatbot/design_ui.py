@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'design.ui'
+# Form implementation generated from reading ui file 'c:\Programming\python\chatbot\design.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setMinimumSize(QtCore.QSize(1300, 650))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icons/icons8-chat-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("c:\\Programming\\python\\chatbot\\icons/icons8-chat-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setWindowOpacity(1.0)
         MainWindow.setAutoFillBackground(False)
@@ -113,7 +113,7 @@ class Ui_MainWindow(object):
         self.home_btn.setFont(font)
         self.home_btn.setStyleSheet("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("icons/icons8-home-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("c:\\Programming\\python\\chatbot\\icons/icons8-home-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.home_btn.setIcon(icon1)
         self.home_btn.setIconSize(QtCore.QSize(30, 30))
         self.home_btn.setFlat(True)
@@ -205,7 +205,7 @@ class Ui_MainWindow(object):
         self.settings_btn.setFont(font)
         self.settings_btn.setStyleSheet("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("icons/icons8-chat-settings-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("c:\\Programming\\python\\chatbot\\icons/icons8-chat-settings-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.settings_btn.setIcon(icon2)
         self.settings_btn.setIconSize(QtCore.QSize(30, 30))
         self.settings_btn.setFlat(True)
@@ -291,7 +291,7 @@ class Ui_MainWindow(object):
 "}")
         self.send.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("icons/icons8-sent-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("c:\\Programming\\python\\chatbot\\icons/icons8-sent-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.send.setIcon(icon3)
         self.send.setIconSize(QtCore.QSize(30, 30))
         self.send.setFlat(True)
@@ -435,13 +435,3 @@ class Ui_MainWindow(object):
         self.submit_code_btn.setText(_translate("MainWindow", "Submit"))
         self.debug_to.setPlaceholderText(_translate("MainWindow", "Improved and Debugged code will appear here"))
         self.copy_code_btn.setText(_translate("MainWindow", "Copy"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())
