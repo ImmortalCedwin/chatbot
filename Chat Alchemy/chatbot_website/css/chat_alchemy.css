@@ -1,0 +1,120 @@
+
+body {
+    background-color: grey;
+    font-family: "Cascadia Code";
+}
+
+.background {
+    display: grid;
+    grid-template-columns: 15% 84%;
+    column-gap: 1%;
+}
+
+.chat_box {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    display: grid;
+    grid-template-rows: 90% auto;
+    border:3px solid black;
+    border-radius: 15px;
+
+    height: 900px;
+    float:right;
+    background-color: lightblue;
+}
+
+.text_area {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    background-color: wheat;
+    border:3px solid black;
+    border-radius: 10px;
+    margin:10px;
+    overflow: auto;
+}
+
+.user_input {
+    grid-row-start: 2;
+    grid-row-end:2;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    border:3px solid black;
+    border-radius: 10px;
+    height: fit-content;
+    padding:10px;
+    margin:10px;
+    background-color: lightgreen;
+}
+
+input[type="text"] {
+    border: 3px solid black;
+    border-radius: 15px;
+    width:85%;
+    padding:10px;
+    float:left
+}
+
+#send_message {
+    background-color: lightseagreen;
+    color:black;
+    padding: 10px;
+    float:right;
+    width:10%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#send_message:hover {
+    background-color: black;
+    color:white;
+    padding: 10px;
+    float:right;
+    width:10%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.side_bar {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    background-color: lightblue;
+    height: 900px;
+    border:3px solid black;
+    border-radius: 15px;
+}
+
+.menu {
+    background-color: lightsalmon;
+    margin: 10px;
+}
+
+
+.message_human {
+    color:black;
+    background-color: lightblue;
+    text-align: right;
+    border: 2px solid black;
+    border-radius: 20px 15px 0px 20px;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left:auto;
+    width: fit-content;
+}
+
+.message_ai {
+    color:black;
+    background-color: yellowgreen;
+    text-align: left;
+    border: 2px solid black;
+    border-radius: 15px 20px 20px 0px;
+    padding:10px;
+    margin-left: 10px;
+    margin-right:auto;
+    width: fit-content;
+}
