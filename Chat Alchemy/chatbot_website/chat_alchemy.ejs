@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <title>Chat Alchemy</title>
+    <head>
+        <meta charset = "UTF-8"
+        <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <link rel = "stylesheet" href="css/chat_alchemy.css">
+
+    <body>
+        <div class = "background">
+            <video id = "bg_blue" src = "resources/blue_-_22908 (Original).mp4" autoplay loop muted ></video>
+
+            <div class = "chat_box">
+                <div class = "text_area" id = "text_area">
+                    <!-- -->
+                    <p class = "message_human">hi</p>
+                    <p class = "message_ai">hi how are you </p>
+                    <p class = "message_human">im fine what about you </p>
+                    <p class = "message_ai">im fine thanks for asking</p>
+                    
+                </div>
+
+                <div class = "user_input">
+                    <input type = "text" id = "user_input" placeholder = "Enter Message">
+                    <input type = "button" id = "send_message" value = "Send" onclick = "send_message()">
+                </div>
+            </div>
+
+            <div class = "side_bar">
+                <div class = "menu">
+                    <input type = "button" id = "home_btn" value = "Home"><br>
+                </div>
+            </div>
+        </div>
+        <script src = "js/chat_alchemy.js" type = "module"></script>
+    </body>
+</html>

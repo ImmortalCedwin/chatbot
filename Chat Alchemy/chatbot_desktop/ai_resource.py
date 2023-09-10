@@ -909,7 +909,7 @@ class ai_resource:
     self.input = " "
   
   def generate_debug_prompt(self):
-    return f"""debug and improve the following code. do not use backticks.
+    return f"""debug and improve the following code.
     {self.input}
     """
   

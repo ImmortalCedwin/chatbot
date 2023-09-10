@@ -1,0 +1,209 @@
+
+body {
+    background-color: grey;
+    font-family: "Cascadia Code";
+}
+
+video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+
+.background {
+    display: grid;
+    grid-template-columns: 15% 84%;
+    column-gap: 1%;
+}
+
+.chat_box {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    display: grid;
+    grid-template-rows: 90% auto;
+    border:3px solid black;
+    border-radius: 15px;
+    height: 900px;
+    float:right;
+    background-color: darkblue;
+    opacity: 0.8;
+}
+
+.text_area {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    background-color: black;
+    border:3px solid black;
+    border-radius: 10px;
+    margin:10px;
+    overflow: auto;
+}
+
+.user_input {
+    grid-row-start: 2;
+    grid-row-end:2;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    border:3px solid black;
+    border-radius: 10px;
+    height: fit-content;
+    padding:10px;
+    margin:10px;
+    background-color: black;
+}
+
+input[type="text"] {
+    font-family: "Cascadia Code";
+    border: 3px solid black;
+    border-radius: 15px;
+    width:85%;
+    padding:10px;
+    float:left;
+    outline: none;
+    font-size: larger;
+}
+
+#send_message {
+    background-color: white;
+    color:black;
+    padding: 14px;
+    float:right;
+    width:10%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#send_message:hover {
+    background-color: black;
+    color:white;
+    padding: 14px;
+    float:right;
+    width:10%;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.side_bar {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    background-color: darkblue;
+    height: 900px;
+    border:3px solid black;
+    border-radius: 15px;
+    opacity: 0.8;
+}
+
+.menu {
+    display: grid;
+    background-color: black;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+#home_btn {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    border: 2px solid black;
+    border-radius: 5px;
+
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+    margin:0 auto;
+    margin-top:20px;
+    width:fit-content;
+}
+
+#home_btn:hover {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    color:white;
+    background-color: black;
+
+    border: 2px solid white;
+    border-radius: 5px;
+
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+    margin:0 auto;
+    margin-top:20px;
+    width:fit-content;
+}
+
+.message_human {
+    color:black;
+    background-color: lightblue;
+
+    text-align: left;
+    font-size: large;
+
+    border: 2px solid black;
+    border-radius: 20px 15px 0px 20px;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 1px blue;
+
+    margin-right: 10px;
+    margin-left:auto;
+    width: fit-content;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.message_ai {
+    color:black;
+    background-color: lightgreen;
+
+    text-align: left;
+    font-size: large;
+
+    border: 2px solid black;
+    border-radius: 15px 20px 20px 0px;
+    padding:10px;
+    box-shadow: -2px 2px 2px 1px lime;
+
+    margin-left: 10px;
+    margin-right:auto;
+    width: fit-content;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.subtext_human {
+    color: white;
+    text-align: right;
+    margin-right: 10px;
+    margin-left:auto;
+}
+
+.subtext_ai {
+    color: white;
+    text-align: left;
+    margin-left: 10px;
+    margin-right:auto;
+}
