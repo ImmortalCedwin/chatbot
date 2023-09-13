@@ -1,3 +1,8 @@
+const showdown = require('showdown');
+const converter = new showdown.Converter();
+
+const express = require("express");
+const app = express();
 
 const { DiscussServiceClient } = require("@google-ai/generativelanguage");
 const { GoogleAuth } = require("google-auth-library");
@@ -91,13 +96,12 @@ async function ai_response(input) {
   const json = JSON.stringify(result);
   const obj = JSON.parse(json);
   const content =  obj[0].candidates[0].content;
+  
+  const html = converter.makeHtml(content);
 
-  return content;
+  return html
 
   };
-
-const express = require("express");
-const app = express();
 
 app.use(express.json());
 
@@ -122,7 +126,9 @@ app.post('/SendMessage', async (req,res) => {
 
   const response = await ai_response(message);
 
-  res.json({response});
+  const html = converter.makeHtml(response);
+
+  res.json({response:html});
 });
 
 app.listen(3000);

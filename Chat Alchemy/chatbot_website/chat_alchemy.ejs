@@ -13,12 +13,12 @@
 
             <div class = "chat_box">
                 <div class = "text_area" id = "text_area">
-                    <!-- -->
-                    <p class = "message_human">hi</p>
-                    <p class = "message_ai">hi how are you </p>
-                    <p class = "message_human">im fine what about you </p>
-                    <p class = "message_ai">im fine thanks for asking</p>
-                    
+                    <!-- 
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">hi</p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">hi how are you </div>
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">im fine what about you </p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">im fine thanks for asking</div>
+                    -->
                 </div>
 
                 <div class = "user_input">
@@ -30,6 +30,17 @@
             <div class = "side_bar">
                 <div class = "menu">
                     <input type = "button" id = "home_btn" value = "Home"><br>
+                    <label class = "chat_mode" for = "select_mode" id = "chat_mode">Chat Mode</label>
+                    <select class = "select_mode" id = "select_mode">
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                        <option>D</option>
+                    </select>
+                    <div class = "features_menu">
+                        <label class = "features" id = "features">Features</label>
+                        <button class = "debug_btn" id = "debug_btn">Debug</button>
+                    </div>
                 </div>
             </div>
         </div>
