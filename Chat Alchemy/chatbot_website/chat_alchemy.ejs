@@ -11,7 +11,7 @@
         <div class = "background">
             <video id = "bg_blue" src = "resources/blue_-_22908 (Original).mp4" autoplay loop muted ></video>
 
-            <div class = "chat_box">
+            <div class = "chat_box" id = "chat_box">
                 <div class = "text_area" id = "text_area">
                     <!-- 
                     <p class = 'subtext_human'>Cedwin</p><p class = "message_human">hi</p>
@@ -22,24 +22,39 @@
                 </div>
 
                 <div class = "user_input">
-                    <input type = "text" id = "user_input" placeholder = "Enter Message">
-                    <input type = "button" id = "send_message" value = "Send" onclick = "send_message()">
+                    <input type = "text" id = "user_input_message" placeholder = "Enter Message">
+                    <input type = "button" id = "send_message" value = "Send">
                 </div>
             </div>
+
+            <div class = "debug_box" id = "debug_box">
+                <div class = "debug_code">
+                    <textarea id = "debug_code_text" placeholder = "Enter Code Here: "></textarea>
+                </div>
+                <div class = "debug_solution">
+                    <textarea id = "debug_solution_text" placeholder = "Result Will Appear Here"></textarea>
+                </div>
+                <input type = "button" id = "submit_btn" value = "Submit">
+                <input type = "button" id = "clear_btn" value = "Clear">
+                <input type = "button" id = "copy_btn" value = "Copy">
+
+            </div>
+            
 
             <div class = "side_bar">
                 <div class = "menu">
                     <input type = "button" id = "home_btn" value = "Home"><br>
                     <label class = "chat_mode" for = "select_mode" id = "chat_mode">Chat Mode</label>
                     <select class = "select_mode" id = "select_mode">
-                        <option>A</option>
-                        <option>B</option>
-                        <option>C</option>
-                        <option>D</option>
+                        <option>Question Answer</option>
+                        <option>Doctor</option>
+                        <option>Friend</option>
+                        <option>DMC</option>
+                        <option>DMC Syllabus</option>
                     </select>
                     <div class = "features_menu">
                         <label class = "features" id = "features">Features</label>
-                        <button class = "debug_btn" id = "debug_btn">Debug</button>
+                        <input type = "button" class = "debug_btn" id = "debug_btn" value = "Debug">
                     </div>
                 </div>
             </div>

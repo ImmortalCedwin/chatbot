@@ -37,6 +37,171 @@ video {
     opacity: 0.8;
 }
 
+.debug_box {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    display: grid;
+    grid-template-rows: 90% auto;
+
+    border:3px solid black;
+    border-radius: 15px;
+
+    height: 900px;
+    float:right;
+    background-color: darkblue;
+    opacity: 0.8;
+}
+
+.debug_code {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 20px;
+}
+
+#debug_code_text {
+    font-size: x-large;
+
+    color: white;
+    background-color: black;
+
+    border: 3px solid cyan;
+    border-radius: 15px;
+    outline: none;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 5px;
+
+    resize: none;
+}
+
+.debug_solution {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 3;
+    grid-column-end: 3;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 40px;
+    margin-left: 20px;
+}
+
+#debug_solution_text {
+    font-size: x-large;
+
+    color: white;
+    background-color: black;
+
+    border: 3px solid cyan;
+    border-radius: 15px;
+    outline: none;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 5px;
+
+    resize: none;
+}
+
+#submit_btn {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    color: white;
+    background-color: black;
+    
+    border: 3px solid black;
+    border-radius: 10px;
+    margin: 20px;
+    margin-left: 30px;
+}
+
+#submit_btn:hover {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    color: white;
+    background-color: black;
+    
+    border: 2px solid cyan;
+    border-radius: 10px;
+    margin: 20px;
+    margin-left: 30px;
+}
+
+#clear_btn {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    color: white;
+    background-color: black;
+    
+    border: 3px solid black;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+#clear_btn:hover {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    color: white;
+    background-color: black;
+    
+    border: 2px solid cyan;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+
+#copy_btn {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 3;
+    grid-column-end: 3;
+
+    color: white;
+    background-color: black;
+    
+    border: 3px solid black;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+#copy_btn:hover {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 3;
+    grid-column-end: 3;
+
+    color: white;
+    background-color: black;
+    
+    border: 2px solid cyan;
+    border-radius: 10px;
+    margin: 20px;
+}
+
 .text_area {
     grid-row-start: 1;
     grid-row-end: 1;
@@ -44,7 +209,7 @@ video {
     grid-column-end: 1;
 
     background-color: black;
-    border:3px solid black;
+    border:3px solid cyan;
     border-radius: 10px;
     margin:10px;
     overflow: auto;
@@ -60,38 +225,54 @@ video {
     border-radius: 10px;
     height: fit-content;
     padding:10px;
-    margin:10px;
+    margin-left: 10px;
+    margin-right: 10px;
     background-color: black;
 }
 
-input[type="text"] {
+#user_input_message {
+    color: white;
+    background-color: black;
+
     font-family: "Cascadia Code";
+    font-size: larger;
+
     border: 3px solid black;
     border-radius: 15px;
+
     width:85%;
     padding:10px;
     float:left;
     outline: none;
-    font-size: larger;
 }
 
 #send_message {
-    background-color: black;
     color:white;
-    padding: 14px;
+    background-color: black;
+
+    font-family: "Cascadia Code";
+    font-size: larger;
+    
+    padding: 10px;
     float:right;
     width:10%;
-    border: 2px solid black;
+
+    border: 3px solid black;
     border-radius: 10px;
 }
 
 #send_message:hover {
-    background-color: black;
     color:white;
-    padding: 14px;
+    background-color: black;
+
+    font-family: "Cascadia Code";
+    font-size: larger;
+    
+    padding: 10px;
     float:right;
     width:10%;
-    border: 2px solid white;
+
+    border: 3px solid cyan;
     border-radius: 10px;
 }
 
@@ -274,7 +455,7 @@ input[type="text"] {
     padding: 10px;
     box-shadow: 2px 2px 2px 1px blue;
 
-    margin-right: 10px;
+    margin-right: 15px;
     margin-bottom: 10px;
     margin-left:auto;
     width: fit-content;
@@ -291,10 +472,10 @@ input[type="text"] {
 
     border: 2px solid black;
     border-radius: 15px 20px 20px 0px;
-    padding:10px;
+    padding: 10px;
     box-shadow: -2px 2px 2px 1px lime;
 
-    margin-left: 10px;
+    margin-left: 15px;
     margin-bottom: 10px;
     margin-right:auto;
     width: fit-content;
