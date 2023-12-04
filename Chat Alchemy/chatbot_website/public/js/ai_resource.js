@@ -969,6 +969,18 @@ function input_code(input) {
     ${input}`
 }
 
+function input_email(style, length, email) {
+    return `Write an email
+
+    it should be in ${style}  style.
+    
+    it should be in ${length} length.
+    
+    the topic of the email is ${email}
+    
+    `
+}
+
 module.exports = {
     context_qa,
     examples_qa,
@@ -978,5 +990,6 @@ module.exports = {
     examples_friend,
     dmc_main,
     dmc_syllabus,
-    input_code
+    input_code,
+    input_email
 }

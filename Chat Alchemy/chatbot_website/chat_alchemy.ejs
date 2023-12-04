@@ -13,12 +13,30 @@
 
             <div class = "chat_box" id = "chat_box">
                 <div class = "text_area" id = "text_area">
-                    <!-- 
+
+                    <!--
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">hi</p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">hi how are you </div>
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">im fine what about you </p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">im fine thanks for asking</div>
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">hi</p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">hi how are you </div>
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">im fine what about you </p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">im fine thanks for asking</div>
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">hi</p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">hi how are you </div>
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">im fine what about you </p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">im fine thanks for asking</div>
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">hi</p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">hi how are you </div>
+                    <p class = 'subtext_human'>Cedwin</p><p class = "message_human">im fine what about you </p>
+                    <p class = 'subtext_ai'>Ai</p><div class = "message_ai">im fine thanks for asking</div>
                     <p class = 'subtext_human'>Cedwin</p><p class = "message_human">hi</p>
                     <p class = 'subtext_ai'>Ai</p><div class = "message_ai">hi how are you </div>
                     <p class = 'subtext_human'>Cedwin</p><p class = "message_human">im fine what about you </p>
                     <p class = 'subtext_ai'>Ai</p><div class = "message_ai">im fine thanks for asking</div>
                     -->
+
                 </div>
 
                 <div class = "user_input">
@@ -32,12 +50,33 @@
                     <textarea id = "debug_code_text" placeholder = "Enter Code Here: "></textarea>
                 </div>
                 <div class = "debug_solution">
-                    <textarea id = "debug_solution_text" placeholder = "Result Will Appear Here"></textarea>
+                    <textarea id = "debug_solution_text" placeholder = "Result Will Appear Here" readonly></textarea>
                 </div>
                 <input type = "button" id = "submit_btn" value = "Submit">
                 <input type = "button" id = "clear_btn" value = "Clear">
                 <input type = "button" id = "copy_btn" value = "Copy">
+            </div>
 
+            <div class = "email_box" id = "email_box">
+                <div class = "email_prompt_box">
+                    <input type = "text" id = "email_prompt" placeholder = "Enter Email Prompt">
+                </div>
+                <div class = "email_style">
+                    <label class = "email_label">Email Style</label>
+                    <input type = "button" class = "email_options_btn" id = "style_professional" value = "Professional">
+                    <input type = "button" class = "email_options_btn" id = "style_casual" value = "Casual">
+                    <input type = "button" class = "email_options_btn" id = "style_informational" value = "Informational">
+                    <input type = "button" class = "email_options_btn" id = "style_funny" value = "Funny">
+                </div>
+                <div class = "email_length">
+                    <label class = "email_label">Email Length</label>
+                    <input type = "button" class = "email_options_btn" id = "length_short" value = "Short">
+                    <input type = "button" class = "email_options_btn" id = "length_medium" value = "Medium">
+                    <input type = "button" class = "email_options_btn" id = "length_long" value = "Long">
+                </div>
+                <div class = "email_result_box" id = "email_result_box">
+                    <textarea id = "email_result" placeholder = "The Generated Email Will Appear Here" readonly></textarea>
+                </div>
             </div>
             
 
@@ -55,6 +94,8 @@
                     <div class = "features_menu">
                         <label class = "features" id = "features">Features</label>
                         <input type = "button" class = "debug_btn" id = "debug_btn" value = "Debug">
+                        <input type = "button" class = "email_generator_btn" id = "email_generator_btn" value = "Email Generator">
+                        <input type = "button" class = "sign_out_btn" id = "sign_out_btn" value = "Sign Out">
                     </div>
                 </div>
             </div>
