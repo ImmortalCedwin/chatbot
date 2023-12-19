@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <title>Chat Alchemy:Login</title>
+    <head>
+        <meta charset = "UTF-8"
+        <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <link rel = "stylesheet" href = "css/login.css">
+    <body>
+        <video src = "resources/yellow_-_27807 (Original).mp4" autoplay loop muted></video>
+        <h1 id = "page_title"></h1>
+
+        <form>
+            <label for = "email">Email</label><br>
+            <input type = "email" id = "email" autocomplete = "off" required><br>
+
+            <label for = "password">Password</label><br>
+            <input type = "password" id = "password" autocomplete = "off" required><br>
+
+            <input type = "button" id = "submit_btn" value = "Submit">
+            
+            <input type = "button" id = "register_btn" value = "Register">
+
+            <script src="js/login.js" type="module"></script>
+
+            <!-- this is the google button sign in code -->
+            <script src="https://accounts.google.com/gsi/client" async></script>
+            <script>
+            function handleCredentialResponse(response) {
+                //console.log("Encoded JWT ID token: " + response.credential);
+                const idToken = response.credential;
+                
+                fetch("/AuthenticateUserGoogle", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ token: idToken}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const login = data.login_check;
+                    if (login) {
+                        window.location.href = "http://localhost:3000/ChatAlchemy";
+                    }   else    {
+                        alert(data.error_code);
+                        console.log(data.error_message);
+                    }
+                })
+            }
+            window.onload = function () {
+                google.accounts.id.initialize({
+                    client_id: "122470997376-p7cmumqvpv46ud07hokcrk68c3dr8tej.apps.googleusercontent.com",
+                    callback: handleCredentialResponse
+                });
+                google.accounts.id.renderButton(
+                document.getElementById("buttonDiv"),
+                { theme: "filled_black", size: "large", shape: "retangular", logo_alignment: "left", width: 220 }
+                );
+                google.accounts.id.prompt();
+            }
+            </script>
+            <div id="buttonDiv" style="float: right; margin: 5px;"></div>
+
+        </form>
+    </body>
+</html>

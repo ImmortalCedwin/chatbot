@@ -376,15 +376,15 @@ app.use(express.static('C:/Programming/Projects/Chat Alchemy/chatbot_website/pub
 app.set("view engine", "ejs");
 
 app.get('/Login', (req,res) => {
-    res.render("C:/Programming/Projects/Chat Alchemy/chatbot_website/login.ejs");
+    res.render("login.ejs");
 })
 
 app.get('/Register', (req,res) => {
-    res.render("c:/Programming/Projects/Chat Alchemy/chatbot_website/register.ejs");
+    res.render("register.ejs");
 })
 
 app.get('/ChatAlchemy', (req,res) => {
-    res.render("C:/Programming/Projects/Chat Alchemy/chatbot_website/chat_alchemy.ejs");
+    res.render("chat_alchemy.ejs");
 })
 
 app.post('/SendMessage', async (req,res) => {
