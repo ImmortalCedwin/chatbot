@@ -41,10 +41,15 @@
                 .then(data => {
                     const login = data.login_check;
                     if (login) {
-                        var session_data = { user_name: data.user_name, email: data.email, provider: data.provider };
-                        sessionStorage.setItem("user_data", JSON.stringify(session_data));
+                        //var session_data = { user_name: data.user_name, email: data.email, provider: data.provider };
+                        //sessionStorage.setItem("user_data", JSON.stringify(session_data));
+                        sessionStorage.setItem("user_name", String(data.user_name));
+                        sessionStorage.setItem("email", String(data.email));
+                        sessionStorage.setItem("provider", String(data.provider));
+                        sessionStorage.setItem("login_check", "true");
                         window.location.href = "/ChatAlchemy";
                     }   else    {
+                        sessionStorage.setItem("login_check", "false");
                         alert(data.error_code);
                         console.log(data.error_message);
                     }

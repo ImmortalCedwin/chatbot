@@ -1,16 +1,30 @@
 
-const user_data = sessionStorage.getItem("user_data");
-const user_data_parsed = JSON.parse(user_data);
+//const user_data = sessionStorage.getItem("user_data");
+//const user_data_parsed = JSON.parse(user_data);
 
-var user_name = user_data_parsed.user_name;
-var email = user_data_parsed.email;
-var provider = user_data_parsed.provider;
+if (sessionStorage.getItem("login_check") == null || sessionStorage.getItem("login_check") == "false") {
+    window.location.href = "/Login";
+}   else    {
+    var user_name = sessionStorage.getItem("user_name");
+    var email = sessionStorage.getItem("email");
+    var provider = sessionStorage.getItem("provider");
 
-var login_check;
-
-var settings_typing_mode; // default value
+    fetch("/GetSettings", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify({user_name})
+    })
+    .then(response => response.json())
+    .then(data => {
+        sessionStorage.setItem("typing_mode", String(data.typing_mode));
+    })
+}
 
 /*
+var login_check;
+
 fetch("/CheckLogin",{
     method: "POST",
     headers: {
@@ -89,10 +103,10 @@ function get_messages(mode_value) {
 }
 
 window.onload = function load_messages() {
-    if (user_name != null) {
-        get_messages(get_mode());
-    }   else    {
+    if (user_name == "error_name") {
         window.location.href = "/Login";
+    }   else    {
+        get_messages(get_mode());
     }
 }
 
@@ -146,7 +160,7 @@ function send_message() {
 
         //handling typing mode
 
-        switch (settings_typing_mode) {
+        switch (sessionStorage.getItem("typing_mode")) {
             case "type":
                 let index = 0;
                 const speed = 20;   // lower is faster
@@ -231,7 +245,7 @@ function set_typing_to_type() {
 
     var new_mode = "type";
 
-    if (settings_typing_mode == "type") {
+    if (sessionStorage.getItem("typing_mode") == "type") {
         return
     }   else    {
         fetch("/UpdateTypingMode", {
@@ -243,7 +257,7 @@ function set_typing_to_type() {
         })
         .then(response => response.json())
         .then(data => {
-            settings_typing_mode = data.typing_mode;
+            sessionStorage.setItem("typing_mode", String(data.typing_mode));
         })
         const type = document.getElementById("typing_btn");
         type.style.backgroundColor = "white";
@@ -258,7 +272,7 @@ function set_typing_to_block() {
     
     var new_mode = "block"
 
-    if (settings_typing_mode == "block") {
+    if (sessionStorage.getItem("typing_mode") == "block") {
         return
     }   else    {
         fetch("/UpdateTypingMode", {
@@ -270,7 +284,7 @@ function set_typing_to_block() {
         })
         .then(response => response.json())
         .then(data => {
-            settings_typing_mode = data.typing_mode;
+            sessionStorage.setItem("typing_mode", String(data.typing_mode));
         })
         const block = document.getElementById("block_btn");
         block.style.backgroundColor = "white";
@@ -473,8 +487,8 @@ function display_settings() {
     })
     .then(response => response.json())
     .then(data => {
-        settings_typing_mode = data.typing_mode;
-        if (settings_typing_mode == "type") {
+        sessionStorage.setItem("typing_mode", String(data.typing_mode))
+        if (sessionStorage.getItem("typing_mode") == "type") {
             const type = document.getElementById("typing_btn");
             type.style.backgroundColor = "white";
             type.style.color = "black";

@@ -369,14 +369,6 @@ const history_alien = [
         parts: [{ text: "how do you travel across space"}],
     },
     {
-        role: "user",
-        parts: [{ text: "<span style=\"background-color: transparent; caret-color: var(--color-secondary-40); color: var(--color-neutral-90);\">"}],
-    },
-    {
-        role: "user",
-        parts: [{ text: "</span>"}],
-    },
-    {
         role: "model",
         parts: [{ text: "As an alien being from the Andromeda galaxy, my civilization has developed advanced technologies that allow us to travel across vast distances in space. Our spacecraft utilize a combination of faster-than-light (FTL) propulsion systems and gravitational manipulation to achieve interstellar travel.\n\nOne of the primary methods we employ is known as warp drive. Warp drive technology creates a subspace bubble around our spacecraft, which allows us to contract space-time in front of the ship and expand it behind, effectively propelling us forward at speeds that exceed the speed of light.\n\nAnother method we use is called quantum entanglement. By entangling the quantum state of our spacecraft with that of a distant destination, we can instantaneously traverse the intervening distance without physically moving through space.\n\nAdditionally, we have mastered the art of manipulating gravity to our advantage. By generating powerful gravitational fields, we can create artificial wormholes or gateways that connect two distant points in space-time, allowing us to travel between them almost instantaneously.\n\nThese technologies, combined with our extensive knowledge of astrophysics and navigation, enable us to traverse the vast expanse of the universe, exploring distant galaxies and civilizations. Our journeys may take us years or even centuries, but our advanced technology allows us to endure the long travel times and maintain contact with our home galaxy.\n\nIt is important to note that the specific details of our space travel technology are highly classified and protected by our civilization. I am not at liberty to divulge any further information on this topic."}],
     },
