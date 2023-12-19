@@ -23,6 +23,7 @@
 
             <script src="js/login.js" type="module"></script>
 
+            <!-- this is the google button sign in code -->
             <script src="https://accounts.google.com/gsi/client" async></script>
             <script>
             function handleCredentialResponse(response) {
@@ -41,6 +42,9 @@
                     const login = data.login_check;
                     if (login) {
                         window.location.href = "http://localhost:3000/ChatAlchemy";
+                    }   else    {
+                        alert(data.error_code);
+                        console.log(data.error_message);
                     }
                 })
             }
@@ -59,6 +63,5 @@
             <div id="buttonDiv" style="float: right; margin: 5px;"></div>
 
         </form>
-        
     </body>
 </html>

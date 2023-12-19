@@ -46,17 +46,20 @@ register_btn.addEventListener("click", () => {
             headers: {
                 "Content-type": "application/json",
             },
-            body: JSON.stringify({email, password}),
+            body: JSON.stringify({user_name, email, password}),
         })
         .then(response => response.json())
         .then(data => {
             if (data.account == true) {
                 console.log("user: " + data.user);
                 document.getElementById("register_form").reset()
-                alert("Account Created !");
-            }   else    {
+                alert("Account Created");
+            }   else
+            if (data.is_error == true)    {
                 alert(data.error_code);
                 console.log("error message: " + data.error_message);
+            }   else    {
+                alert("Account with username already exists");
             }
         })
 

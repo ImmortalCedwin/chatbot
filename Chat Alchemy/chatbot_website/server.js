@@ -7,21 +7,26 @@ const { markdownToTxt } = require('markdown-to-txt');
 const express = require("express");
 const app = express();
 
-
 // Firebase Code for database
-/*
-const { initializeApp, cert } = require("firebase-admin/app");
-const { getFirestore } = require("firebase-admin/firestore");
+const { Timestamp, FieldValue } = require("firebase-admin/firestore");
 
+function firestore() {
+    
+    const { initializeApp, cert } = require("firebase-admin/app");
+    const { getFirestore } = require("firebase-admin/firestore");
 
-const service_account = require("./public/js/firebase_cred.json");
+    const service_account = require("./public/js/firebase_cred.json");
 
-initializeApp({
-    credential: cert(service_account)
-})
+    initializeApp({
+        credential: cert(service_account)
+    })
 
-const db = getFirestore();
-*/
+    const db = getFirestore();
+
+    return db
+}
+
+const db = firestore();
 
 const { getAuth, signInWithCredential, GoogleAuthProvider,
         signOut, onAuthStateChanged, createUserWithEmailAndPassword,
@@ -46,32 +51,21 @@ const auth = getAuth(firebase);
 
 const ai = require('./public/js/ai_resource.js');
 
-const { TextServiceClient } = require("@google-ai/generativelanguage");
-const { DiscussServiceClient } = require("@google-ai/generativelanguage");
+const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold,} = require("@google/generative-ai");
 const { GoogleAuth } = require("google-auth-library");
 
-const MODEL_NAME_TEXT = "models/text-bison-001";
-const MODEL_NAME = "models/chat-bison-001";
-const API_KEY = "AIzaSyDUoEjt1TuSBUqkH8YYL30rnQZQGvvPJbg";
+const MODEL_NAME = "gemini-pro";
+const API_KEY = "AIzaSyDnjaNLtw9PwIIKDNaqd0BpqS9KLla3LpI";
 
-const client = new DiscussServiceClient({
-	authClient: new GoogleAuth().fromAPIKey(API_KEY),
-});
-
-const client_text = new TextServiceClient({
-    authClient: new GoogleAuth().fromAPIKey(API_KEY),
-});
 
 var mode = "Question Answer";
 var current_mode = mode;
 
-const messages = [];
-
 async function ai_response(input) {
   
-    var context;
-    var examples;
-    var temprature;
+    var safetySettings = ai.safety_settings;
+    var generationConfig;
+    var history;
     var promptString;
 
     if (current_mode == mode) {
@@ -80,33 +74,34 @@ async function ai_response(input) {
 
         switch (mode) {
             case "Question Answer":
-                context = ai.context_qa;
-                examples = ai.examples_qa;
-                temprature = 0.3;
+                generationConfig = ai.gen_config_qa;
+                history = ai.history_qa;
                 break;
     
             case "Doctor":
-                context = ai.context_doctor;
-                examples = ai.examples_doctor;
-                temprature = 0.3;
+                generationConfig = ai.gen_config_doctor;
+                history = ai.history_doctor
                 break;
     
             case "Friend":
-                context = ai.context_friend;
-                examples = ai.examples_friend;
-                temprature = 0.9;
+                generationConfig = ai.gen_config_friend;
+                history = ai.history_friend;
+                break;
+
+            case "Therapist":
+                generationConfig = ai.gen_config_therapist;
+                history = ai.history_therapist
+                break;
+
+            case "Alien":
+                generationConfig = ai.gen_config_alien;
+                history = ai.history_alien;
                 break;
 
             case "DMC":
-                promptString = ai.dmc_main(input);
-                temprature = 0.15;
+                generationConfig = ai.gen_config_dmc;
                 break;
             
-            case "DMC Syllabus":
-                promptString = ai.dmc_syllabus(input);
-                temprature = 0.15;
-                break;
-    
             default:
                 console.log("Mode Error"); // the code will ideally never reach here
                 break;
@@ -115,38 +110,37 @@ async function ai_response(input) {
     }   else    {
 
         // if the mode gets changed then it will come here
-        // here we just clear the old messages array and change the parameters
 
         current_mode = mode;
-        messages.length = 0;
 
         switch (mode) {
             case "Question Answer":
-                context = ai.context_qa;
-                examples = ai.examples_qa;
-                temprature = 0.3;
+                generationConfig = ai.gen_config_qa;
+                history = ai.history_qa;
                 break;
     
             case "Doctor":
-                context = ai.context_doctor;
-                examples = ai.examples_doctor;
-                temprature = 0.3;
+                generationConfig = ai.gen_config_doctor;
+                history = ai.history_doctor
                 break;
     
             case "Friend":
-                context = ai.context_friend;
-                examples = ai.examples_friend;
-                temprature = 0.9;
+                generationConfig = ai.gen_config_friend;
+                history = ai.history_friend;
+                break;
+
+            case "Therapist":
+                generationConfig = ai.gen_config_therapist;
+                history = ai.history_therapist
+                break;
+
+            case "Alien":
+                generationConfig = ai.gen_config_alien;
+                history = ai.history_alien;
                 break;
 
             case "DMC":
-                promptString = ai.dmc_main(input);
-                temprature = 0.15;
-                break;
-
-            case "DMC Syllabus":
-                promptString = ai.dmc_syllabus(input);
-                temprature = 0.15;
+                generationConfig = ai.gen_config_dmc;
                 break;
     
             default:
@@ -156,113 +150,223 @@ async function ai_response(input) {
 
     }
 
-    if (mode == "Question Answer" || mode == "Doctor" || mode == "Friend") {
+    if (mode == "Question Answer" || mode == "Doctor" || mode == "Friend" || mode == "Therapist" || mode == "Alien") {
 
-        messages.push({ "content": `${input}` });
+        async function runChat() {
+            const genAI = new GoogleGenerativeAI(API_KEY);
+            const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+        
+            const chat = model.startChat({
+                generationConfig,
+                safetySettings,
+                history: history,
+            });
+        
+            const result = await chat.sendMessage(input);
+            const response = result.response;
 
-        const result = await client.generateMessage({
-            model: MODEL_NAME,
-            temperature: temprature,
-            candidateCount: 1,
-            top_k: 40,
-            top_p: 0.95,
-            prompt: {
-                context: context,
-                examples: examples,
-                messages: messages,
-            },
-        });
+            const html = converter.makeHtml(response.text());
 
-        const json = JSON.stringify(result);
-        const obj = JSON.parse(json);
-        const content =  obj[0].candidates[0].content;
+            return html
+        }
+        
+        return runChat();
 
-        const html = converter.makeHtml(content);
+    }   
+    
+    else if (mode == "DMC") {
 
-        return html
-
-    }   else if (mode == "DMC" || mode == "DMC Syllabus") {
-
-        const result = await client_text.generateText({
-            model: MODEL_NAME_TEXT,
-            temperature: temprature,
-            candidateCount: 1,
-            top_k: 40,
-            top_p: 0.95,
-            max_output_tokens: 1024,
+        async function run() {
+            const genAI = new GoogleGenerativeAI(API_KEY);
+            const model = genAI.getGenerativeModel({ model: MODEL_NAME });
             
-            safety_settings: [{"category":"HARM_CATEGORY_DEROGATORY","threshold":1},{"category":"HARM_CATEGORY_TOXICITY","threshold":1},{"category":"HARM_CATEGORY_VIOLENCE","threshold":2},{"category":"HARM_CATEGORY_SEXUAL","threshold":2},{"category":"HARM_CATEGORY_MEDICAL","threshold":2},{"category":"HARM_CATEGORY_DANGEROUS","threshold":2}],
-            prompt: {
-                text: promptString,
-            },
-        })
-        
-        const json = JSON.stringify(result);
-        const obj = JSON.parse(json);
-        const content =  obj[0].candidates[0].output
-        
-        const html = converter.makeHtml(content);
+            const parts = ai.parts;
 
-        return html
+            parts.push({text: `${input}`},)
+            
+            const result = await model.generateContent({
+                contents: [{ role: "user", parts }],
+                generationConfig,
+                safetySettings,
+            });
+
+            parts.length = 1;
+            
+            const response = result.response;
+
+            const html = converter.makeHtml(response.text());
+
+            return html
+        }
+            
+        return run();
 
     }
 
 };
 
 
-
 async function debug_code(code) {
 
-    const code_input = ai.input_code(code);
-
-    const result = await client_text.generateText({
-        model: MODEL_NAME_TEXT,
-        temperature: 0.2,
-        candidateCount: 1,
-        top_k: 40,
-        top_p: 0.95,
-        max_output_tokens: 1024,
+    async function run() {
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: MODEL_NAME });
         
-        safety_settings: [{"category":"HARM_CATEGORY_DEROGATORY","threshold":1},{"category":"HARM_CATEGORY_TOXICITY","threshold":1},{"category":"HARM_CATEGORY_VIOLENCE","threshold":2},{"category":"HARM_CATEGORY_SEXUAL","threshold":2},{"category":"HARM_CATEGORY_MEDICAL","threshold":2},{"category":"HARM_CATEGORY_DANGEROUS","threshold":2}],
-        prompt: {
-            text: code_input,
-        },
-    })
+        const generationConfig = {
+            temperature: 0.2,
+            topK: 1,
+            topP: 1,
+            maxOutputTokens: 2048,
+        };
 
-    const json = JSON.stringify(result);
-    const obj = JSON.parse(json);
-    const content =  obj[0].candidates[0].output
-    
-    const text = markdownToTxt(content);
+        safetySettings = ai.safety_settings;
+        
+        const parts = [
+            {text: "debug and improve the following code.\n\n"},
+        ];
 
-    return text
+        parts.push({text: `${code}`},)
+        
+        const result = await model.generateContent({
+            contents: [{ role: "user", parts }],
+            generationConfig,
+            safetySettings,
+        });
+
+        parts.length = 1;
+        
+        const response = result.response;
+
+        const text = markdownToTxt(response.text());
+
+        return text
+    }
+        
+    return run();
 
 }
 
 async function generate_email(email, style, length) {
-    const mail = ai.input_email(style,length,email)
 
-    const result = await client_text.generateText({
-        model: MODEL_NAME_TEXT,
-        temperature: 0.7,
-        candidateCount: 1,
-        top_k: 40,
-        top_p: 0.95,
-        max_output_tokens: 1024,
+    const mail = ai.input_email(style,length,email) // this will return the complete prompt
+
+    async function run() {
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: MODEL_NAME });
         
-        safety_settings: [{"category":"HARM_CATEGORY_DEROGATORY","threshold":1},{"category":"HARM_CATEGORY_TOXICITY","threshold":1},{"category":"HARM_CATEGORY_VIOLENCE","threshold":2},{"category":"HARM_CATEGORY_SEXUAL","threshold":2},{"category":"HARM_CATEGORY_MEDICAL","threshold":2},{"category":"HARM_CATEGORY_DANGEROUS","threshold":2}],
-        prompt: {
-            text: mail,
-        },
-    })
+        const generationConfig = {
+            temperature: 0.7,
+            topK: 1,
+            topP: 1,
+            maxOutputTokens: 2048,
+        };
+        
+        const safetySettings = ai.safety_settings;
+        
+        const parts = [
+            {text: `Write an email\n\nit should be in ${style} style.\n\nit should be in ${length} length.\n\nthe topic of the email is ${email} \n`},
+        ];
+        
+        const result = await model.generateContent({
+            contents: [{ role: "user", parts }],
+            generationConfig,
+            safetySettings,
+        });
+        
+        const response = result.response;
 
-    const json = JSON.stringify(result);
-    const obj = JSON.parse(json);
-    const content =  obj[0].candidates[0].output
+        const text = markdownToTxt(response.text());
+
+        return text
+    }
+        
+    return run();
+
+}
+
+async function translate_text(lang_1,lang_2,text) {
+
+    async function run() {
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: MODEL_NAME });
     
-    const text = markdownToTxt(content);
+        const generationConfig = {
+            temperature: 0.4,
+            topK: 1,
+            topP: 1,
+            maxOutputTokens: 2048,
+        };
+    
+        const safetySettings = ai.safety_settings;
+    
+        const parts = [
+            {text: `\nTranslate this text from ${lang_1} to ${lang_2} :\n\n ${text}`},
+        ];
+    
+        const result = await model.generateContent({
+            contents: [{ role: "user", parts }],
+            generationConfig,
+            safetySettings,
+        });
+    
+        const response = result.response;
+        const translated_text = markdownToTxt(response.text())
 
-    return text
+        return translated_text;
+    }
+    
+    return run();
+}
+
+async function add_user_to_database_google(username,email,provider) {
+
+    const user_ref = db.collection("Users").doc(username);
+
+    const doc = await user_ref.get()
+
+    if (!doc.exists) {
+        user_ref.set({
+            "Username":username,
+            "Email":email,
+            "Provider":provider
+        })
+    }   else    {
+        return
+    }
+
+}
+
+async function check_if_user_exits(username) {
+
+    const user_ref = db.collection("Users").doc(username);
+
+    const doc = await user_ref.get();
+
+    if (doc.exists) {
+        return true
+    }   else    {
+        return false
+    }
+
+}
+
+async function add_user_to_database_email(username,email,password,provider) {
+
+    const user_ref = db.collection("Users").doc(username);
+
+    const doc = await user_ref.get();
+
+    if (!doc.exists) {
+        user_ref.set({
+            "Username":username,
+            "Password":password,
+            "Email":email,
+            "Provider":provider
+        })
+    }   else    {
+        return false
+    }
+
 }
 
 app.use(express.json());
@@ -305,6 +409,101 @@ app.post('/SendMessage', async (req,res) => {
     
 });
 
+app.post("/SendMessageToDatabase", async (req,res) => {
+
+    const user_name = req.body.user_name;
+    const mode = req.body.mode;
+    const user_message = req.body.user_message;
+    const ai_message = req.body.ai_response;
+
+    const doc_ref = db.collection("Users").doc(user_name).collection(mode);
+
+    doc_ref.add({
+        "user": user_message,
+        "ai": ai_message,
+        "timestamp": FieldValue.serverTimestamp()
+    })
+
+})
+
+app.post("/GetMessagesFromDatabase", async (req,res) => {
+
+    const mode = req.body.mode_value;
+    const user_name = req.body.user_name;
+
+    const doc_ref = db.collection("Users").doc(user_name).collection(mode);
+
+    const data = await doc_ref.orderBy("timestamp").get();
+
+    const messages = new Array();
+
+    data.docs.forEach((docs) => {
+        const user = docs.data().user;
+        const ai = docs.data().ai;
+
+        messages.push(user);
+        messages.push(ai);
+        
+    })
+
+    res.json({messages});
+
+})
+
+app.post("/DeleteMessages", (req,res) => {
+
+    const mode = req.body.mode;
+	const user_name = req.body.user_name;
+
+	const path = `Users/${user_name}/${mode}`;
+
+
+    async function deleteCollection(db, collectionPath, batchSize) {
+    	const collectionRef = db.collection(collectionPath);
+        const query = collectionRef.orderBy('__name__').limit(batchSize);
+      
+        return new Promise((resolve, reject) => {
+        	deleteQueryBatch(db, query, resolve).catch(reject);
+        });
+    }
+      
+	async function deleteQueryBatch(db, query, resolve) {
+		const snapshot = await query.get();
+	
+		const batchSize = snapshot.size;
+		if (batchSize === 0) {
+			// When there are no documents left, we are done
+			resolve();
+			return;
+		}
+	
+		// Delete documents in a batch
+		const batch = db.batch();
+		snapshot.docs.forEach((doc) => {
+			batch.delete(doc.ref);
+		});
+		await batch.commit();
+	
+		// Recurse on the next process tick, to avoid
+		// exploding the stack.
+		process.nextTick(() => {
+			deleteQueryBatch(db, query, resolve);
+		});
+	}
+
+	deleteCollection(db,path, 2)
+	.then(() => {
+		var delete_success = "The messages were successfully deleted"
+
+		res.json({response:delete_success});
+	})
+	.catch((error) => {
+		var error_message = error.message;
+
+		res.json({response:error_message});
+	})
+})
+
 app.post("/SendCode", async (req,res) => {
     const code = req.body.debug_code;
 
@@ -323,6 +522,18 @@ app.post("/SendMail", async (req,res) => {
     res.json({response:mail});
 })
 
+app.post("/Translate", async (req,res) => {
+
+    const lang_1 = req.body.lang_1;
+    const lang_2 = req.body.lang_2;
+    const text = req.body.text;
+
+    const translated_text = await translate_text(lang_1,lang_2,text);
+    
+    res.json({translated_text});
+    
+})
+
 app.post("/AuthenticateUserGoogle", (req,res) => {
 
     var login_condition = false;
@@ -334,10 +545,12 @@ app.post("/AuthenticateUserGoogle", (req,res) => {
     const auth = getAuth(firebase);
 
     signInWithCredential(auth, credential)
-    .then((user) => {
+    .then((userCredential) => {
+        const user = userCredential.user;
+
         login_condition = true;
-        console.log("login successful");
-        //console.log(user);
+        
+        add_user_to_database_google(user.displayName, user.email, user.providerData[0].providerId);
 
         res.json({login_check:login_condition});
     })
@@ -398,36 +611,109 @@ app.post("/SignOutUser", (req,res) => {
     });
 })
 
-app.post("/CreateUser", (req, res) => {
+app.post("/CreateUser", async (req, res) => {
 
+    const user_name = req.body.user_name;
     const email = req.body.email;
     const password = req.body.password;
 
-    var account_created = false
+    var account_created = false;
 
-    createUserWithEmailAndPassword(auth, email, password)
+    var is_error = false;
+
+    const exists = await check_if_user_exits(user_name);
+
+    if (exists == false) {
+        createUserWithEmailAndPassword(auth, email, password)
         .then((user_credential) => {
             const user = user_credential.user;
             account_created = true
 
+            add_user_to_database_email(user_name, email, password, "password")
+
             res.json({user:user, account:account_created});
         })
         .catch((error) => {
+            is_error = true;
+
             const error_code = error.code;
             const error_message = error.message;
 
-            res.json({error_code:error_code, error_message:error_message});
+            res.json({error_code:error_code, error_message:error_message, is_error});
         })
-})
-
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        //console.log("user is signed in");
-        //console.log(user.displayName);
-        //console.log(user.email);
     }   else    {
-        //console.log("user is signed out");
+        res.json({account:account_created, is_error})
     }
 })
 
-app.listen(3000);
+var login_condition = false;
+var user_name;
+var user_email;
+var user_provider;
+
+onAuthStateChanged(auth, (user) => {
+    
+    if (user) {
+
+        login_condition = true;
+
+        user_name = user.displayName;
+        user_email = user.email;
+        user_provider = user.providerData[0].providerId;
+        
+        console.log("--------------------------------------------");
+        console.log("user is signed in");
+        console.log(user.displayName);
+        console.log(user.email);
+        console.log(user.providerData[0].providerId);
+        console.log("--------------------------------------------");
+        
+    }   else    {
+
+        login_condition = false;
+
+        console.log("user is signed out");
+    }
+
+})
+
+app.post("/CheckLogin", (req,res) => {
+    res.json({login_condition,name:user_name,email:user_email,provider:user_provider})
+})
+
+
+// to do : check if you can use doc instead of new_doc
+app.post("/UpdateTypingMode", async (req,res) => {
+    
+    const user_name = req.body.user_name;
+    const new_mode = req.body.new_mode
+
+    const setting_ref = db.collection("Users").doc(user_name).collection("Settings").doc("Settings");
+
+    const doc = await setting_ref.update({"Typing Mode":new_mode});
+
+    const new_doc = await setting_ref.get();
+
+    res.json({typing_mode:new_doc.data()["Typing Mode"]});
+    
+})
+
+app.post("/GetSettings", async (req,res) => {
+
+    const user_name = req.body.user_name;
+
+    const setting_ref = db.collection("Users").doc(user_name).collection("Settings").doc("Settings");
+
+    const doc = await setting_ref.get();
+
+    if(!doc.exists) {
+        setting_ref.set({
+            "Typing Mode":"type"
+        })
+    }   else    {
+        res.json({typing_mode:doc.data()["Typing Mode"]});
+    }
+
+})
+
+app.listen(process.env.PORT || 3000);

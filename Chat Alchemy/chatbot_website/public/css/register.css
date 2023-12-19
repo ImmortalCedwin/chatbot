@@ -16,87 +16,76 @@ video {
 h3 {
     color:white;
     text-align: center;
-    font-size: 2vw;
+    font-size: calc(1.5vh + 1.5vw);
 }
 
-form{
+form {
     background-color: black;
+
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     border: 20px solid black;
     border-radius: 15px;
-    padding: 4vw;
-    width:30%;
-    height:30%;
-    margin-top: 10%;
-    margin-left: 30%;
-    margin-right:30%;
+
+    padding: 2%;
+    padding-bottom: 4%;
+
+    width: 30vw;
+    height: 26vw;
+
+    margin: 0 auto;
+
     opacity: 0.75;
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
-    width: 98%;
+    font-size: calc(0.7vh + 0.7vw);
+
+    height: 3vh;
+    width: 29vw;
+
     border: 2px solid black;
     border-bottom: 2px solid white;
+
     padding: 5px;
+
     margin-top: 10px;
     margin-bottom: 15px;
+
     background-color: black;
     color: white;
 }
 
 
 input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
-    width: 98%;
-    padding: 5px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    background-color: black;
-    color: white;
     outline: none;
 }
 
-input[type="submit"] {
-    color: white;
-    background-color: black;
-    border: 3px solid white;
-    border-radius: 10px;
-    padding:10px;
-    width:25%;
-    float:left;
-    margin-right: 5%;
-}
-
-input[type="submit"]:hover {
-    color: black;
-    background-color: white;
-    border: 3px solid white;
-    border-radius: 10px;
-    padding:10px;
-    width:25%;
-    float:left;
-    margin-bottom: 15px;
-    margin-right: 5%;
-}
-
 input[type="button"] {
+    font-size: calc(0.7vh + 0.7vw);
+
+    height: 5vh;
+    width: 10vw;
+
     color: white;
     background-color: black;
+
     border: 3px solid white;
     border-radius: 10px;
+
     padding:10px;
-    width:25%;
 }
 
 input[type="button"]:hover {
     color: black;
     background-color: white;
-    border: 3px solid white;
-    border-radius: 10px;
-    padding:10px;
-    width:25%;
 }
 
 label {
+    font-size: calc(0.7vh + 0.7vw);
     color:white;
     padding:10px;
-    font-size: 20px;
 }
