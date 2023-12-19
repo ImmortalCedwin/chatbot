@@ -1,12 +1,16 @@
 
-var user_name;
-var email;
-var provider;
+const user_data = sessionStorage.getItem("user_data");
+const user_data_parsed = JSON.parse(user_data);
+
+var user_name = user_data_parsed.user_name;
+var email = user_data_parsed.email;
+var provider = user_data_parsed.provider;
 
 var login_check;
 
 var settings_typing_mode; // default value
 
+/*
 fetch("/CheckLogin",{
     method: "POST",
     headers: {
@@ -39,7 +43,7 @@ fetch("/CheckLogin",{
         
     }
 })
-
+*/
 
 // it loads all the pages by default so im hiding the other pages
 function load_home_page() {
@@ -85,12 +89,11 @@ function get_messages(mode_value) {
 }
 
 window.onload = function load_messages() {
-    if (login_check == true) {
+    if (user_name != null) {
         get_messages(get_mode());
     }   else    {
         window.location.href = "/Login";
     }
-    
 }
 
 const mode = document.getElementById("select_mode");

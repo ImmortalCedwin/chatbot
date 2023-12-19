@@ -552,7 +552,7 @@ app.post("/AuthenticateUserGoogle", (req,res) => {
         
         add_user_to_database_google(user.displayName, user.email, user.providerData[0].providerId);
 
-        res.json({login_check:login_condition});
+        res.json({login_check:login_condition, user_name:user.displayName, email:user.email, provider:user.providerData[0].providerId});
     })
     .catch((error) => {
 
@@ -646,7 +646,7 @@ app.post("/CreateUser", async (req, res) => {
     }
 })
 
-var login_condition = false;
+var login_condition = true;
 var user_name;
 var user_email;
 var user_provider;
@@ -677,10 +677,11 @@ onAuthStateChanged(auth, (user) => {
 
 })
 
+/*
 app.post("/CheckLogin", (req,res) => {
     res.json({login_condition,name:user_name,email:user_email,provider:user_provider})
 })
-
+*/
 
 // to do : check if you can use doc instead of new_doc
 app.post("/UpdateTypingMode", async (req,res) => {

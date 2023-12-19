@@ -41,6 +41,8 @@
                 .then(data => {
                     const login = data.login_check;
                     if (login) {
+                        var session_data = { user_name: data.user_name, email: data.email, provider: data.provider };
+                        sessionStorage.setItem("user_data", JSON.stringify(session_data));
                         window.location.href = "/ChatAlchemy";
                     }   else    {
                         alert(data.error_code);
