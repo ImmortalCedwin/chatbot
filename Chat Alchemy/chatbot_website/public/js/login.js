@@ -22,7 +22,7 @@ register_btn.addEventListener("click", () => {
 })
 
 function open_registration_page() {
-    window.location.href = "http://localhost:3000/Register";
+    window.location.href = "/Register";
 }
 
 const submit_btn = document.getElementById("submit_btn");
@@ -44,7 +44,7 @@ submit_btn.addEventListener("click", () => {
         if (data.login_check == true) {
             console.log(data.user);
 
-            window.location.href = "http://localhost:3000/ChatAlchemy"
+            window.location.href = "/ChatAlchemy"
         }   else    {
             alert(data.error_code);
             console.log(data.error_message);

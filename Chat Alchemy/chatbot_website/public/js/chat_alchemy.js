@@ -18,7 +18,7 @@ fetch("/CheckLogin",{
 .then(data => {
     if (data.login_condition == false) {
         login_check = false;
-        window.location.href = "http://localhost:3000/Login";
+        window.location.href = "/Login";
     }   else    {
         login_check = true;
         user_name = data.name;
@@ -88,7 +88,7 @@ window.onload = function load_messages() {
     if (login_check == true) {
         get_messages(get_mode());
     }   else    {
-        window.location.href = "http://localhost:3000/Login";
+        window.location.href = "/Login";
     }
     
 }
@@ -495,7 +495,7 @@ function sign_out() {
     .then(response => response.json())
     .then(data => {
         if (data.response == "sign_out") {
-            window.location.href = "http://localhost:3000/Login";
+            window.location.href = "/Login";
         }   else    {
             alert(data.error_message);
         }

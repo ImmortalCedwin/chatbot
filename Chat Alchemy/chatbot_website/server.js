@@ -371,7 +371,7 @@ async function add_user_to_database_email(username,email,password,provider) {
 
 app.use(express.json());
 
-app.use(express.static('C:/Programming/Projects/Chat Alchemy/chatbot_website/public'))
+app.use(express.static('public'))
 
 app.set("view engine", "ejs");
 

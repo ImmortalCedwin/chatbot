@@ -41,7 +41,7 @@
                 .then(data => {
                     const login = data.login_check;
                     if (login) {
-                        window.location.href = "http://localhost:3000/ChatAlchemy";
+                        window.location.href = "/ChatAlchemy";
                     }   else    {
                         alert(data.error_code);
                         console.log(data.error_message);

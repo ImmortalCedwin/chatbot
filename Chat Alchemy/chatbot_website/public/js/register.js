@@ -3,7 +3,7 @@ const login_btn = document.getElementById("login_btn");
 const register_btn = document.getElementById("register_btn");
 
 function open_login_page() {
-    window.location.href = "http://localhost:3000/Login";
+    window.location.href = "/Login";
 }
 
 function validateEmail(email) {
