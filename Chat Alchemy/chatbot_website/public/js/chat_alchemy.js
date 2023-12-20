@@ -1,7 +1,4 @@
 
-//const user_data = sessionStorage.getItem("user_data");
-//const user_data_parsed = JSON.parse(user_data);
-
 if (sessionStorage.getItem("login_check") == null || sessionStorage.getItem("login_check") == "false") {
     window.location.href = "/Login";
 }   else    {
@@ -21,43 +18,6 @@ if (sessionStorage.getItem("login_check") == null || sessionStorage.getItem("log
         sessionStorage.setItem("typing_mode", String(data.typing_mode));
     })
 }
-
-/*
-var login_check;
-
-fetch("/CheckLogin",{
-    method: "POST",
-    headers: {
-        "Content-type": "application/json",
-    },
-    body: JSON.stringify({})
-})
-.then(response => response.json())
-.then(data => {
-    if (data.login_condition == false) {
-        login_check = false;
-        window.location.href = "/Login";
-    }   else    {
-        login_check = true;
-        user_name = data.name;
-        email = data.email;
-        provider = data.provider;
-
-        fetch("/GetSettings", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({user_name})
-        })
-        .then(response => response.json())
-        .then(data => {
-            settings_typing_mode = data.typing_mode;
-        })
-        
-    }
-})
-*/
 
 // it loads all the pages by default so im hiding the other pages
 function load_home_page() {

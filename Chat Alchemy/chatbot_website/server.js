@@ -375,15 +375,19 @@ app.use(express.static('public'))
 
 app.set("view engine", "ejs");
 
-app.get('/Login', (req,res) => {
+app.get("/", (req,res) => {
+    res.render("login.ejs")
+})
+
+app.get("/Login", (req,res) => {
     res.render("login.ejs");
 })
 
-app.get('/Register', (req,res) => {
+app.get("/Register", (req,res) => {
     res.render("register.ejs");
 })
 
-app.get('/ChatAlchemy', (req,res) => {
+app.get("/ChatAlchemy", (req,res) => {
     res.render("chat_alchemy.ejs");
 })
 
@@ -676,12 +680,6 @@ onAuthStateChanged(auth, (user) => {
     }
 
 })
-
-/*
-app.post("/CheckLogin", (req,res) => {
-    res.json({login_condition,name:user_name,email:user_email,provider:user_provider})
-})
-*/
 
 // to do : check if you can use doc instead of new_doc
 app.post("/UpdateTypingMode", async (req,res) => {
