@@ -41,8 +41,6 @@
                 .then(data => {
                     const login = data.login_check;
                     if (login) {
-                        //var session_data = { user_name: data.user_name, email: data.email, provider: data.provider };
-                        //sessionStorage.setItem("user_data", JSON.stringify(session_data));
                         sessionStorage.setItem("user_name", String(data.user_name));
                         sessionStorage.setItem("email", String(data.email));
                         sessionStorage.setItem("provider", String(data.provider));
@@ -61,13 +59,13 @@
                     callback: handleCredentialResponse
                 });
                 google.accounts.id.renderButton(
-                document.getElementById("buttonDiv"),
-                { theme: "filled_black", size: "large", shape: "retangular", logo_alignment: "left", width: 220 }
+                    document.getElementById("buttonDiv"),
+                    { theme: "filled_black", size: "large", shape: "retangular", logo_alignment: "left"}
                 );
                 google.accounts.id.prompt();
             }
             </script>
-            <div id="buttonDiv" style="float: right; margin: 5px;"></div>
+            <div id="buttonDiv"></div>
 
         </form>
     </body>

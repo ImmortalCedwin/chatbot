@@ -169,7 +169,7 @@ async function ai_response(input) {
 
             return html
         }
-        
+
         return runChat();
 
     }   
@@ -350,6 +350,15 @@ async function check_if_user_exits(username) {
 
 }
 
+async function get_user_name(email) {
+
+    const user_ref = db.collection("Users");
+
+    const name_ref = user_ref.where("email", "==", email);
+
+    return name_ref
+}
+
 async function add_user_to_database_email(username,email,password,provider) {
 
     const user_ref = db.collection("Users").doc(username);
@@ -405,6 +414,7 @@ app.post('/SendMessage', async (req,res) => {
     } catch (error) {
 
         const content = "Error";
+
         res.json({response:content});
 
         console.log(error);
@@ -582,13 +592,17 @@ app.post("/AuthenticateUserEmail", (req,res) => {
     const email = req.body.email;
     const password = req.body.password;
 
+    const provider = "password";
+
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-        const user = userCredential.user;
+        //const user = userCredential.user;
+
+        var user_name = get_user_name(email);
 
         login_condition = true;
 
-        res.json({login_check:login_condition, user:user});
+        res.json({login_check:login_condition, user_name, email, provider});
     })
     .catch((error) => {
         const errorCode = error.code;
@@ -631,6 +645,7 @@ app.post("/CreateUser", async (req, res) => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((user_credential) => {
             const user = user_credential.user;
+
             account_created = true
 
             add_user_to_database_email(user_name, email, password, "password")
@@ -677,6 +692,7 @@ onAuthStateChanged(auth, (user) => {
         login_condition = false;
 
         console.log("user is signed out");
+        
     }
 
 })

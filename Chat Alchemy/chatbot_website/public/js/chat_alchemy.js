@@ -42,6 +42,8 @@ function get_mode() {
 
 function get_messages(mode_value) {
 
+    var mode_name = get_mode()
+
     fetch("/GetMessagesFromDatabase", {
         method: "POST",
         headers: {
@@ -54,7 +56,7 @@ function get_messages(mode_value) {
         const messages = data.messages;
         for(let i = 1; i <= messages.length; i++) {
             if (i % 2 == 0) {
-                document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_ai'>" + "Ai" + "</p>" + "<div class = 'message_ai'>" + messages[i-1] + "</div>");
+                document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_ai'>" + mode_name + "</p>" + "<div class = 'message_ai'>" + messages[i-1] + "</div>");
             }   else    {
                 document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_human'>" + user_name + "</p>" + "<p class = 'message_human'>" + messages[i-1] + "</p>");
             }
@@ -158,12 +160,12 @@ function send_message() {
                         setTimeout(type_writer, speed);
                     }
                 }
-                document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_ai'>" + "Ai" + "</p>" + "<div class = 'message_ai'></div>");
+                document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_ai'>" + mode_value + "</p>" + "<div class = 'message_ai'></div>");
                 type_writer();
                 break;
 
             case "block":
-                document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_ai'>" + "Ai" + "</p>" + "<div class = 'message_ai'>" + ai_response + "</div>");
+                document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_ai'>" + mode_value + "</p>" + "<div class = 'message_ai'>" + ai_response + "</div>");
                 container.scrollTop = container.scrollHeight;
             default:
                 break;
@@ -258,9 +260,11 @@ function set_typing_to_block() {
 function translate() {
 
     const lang_1 = document.getElementById("language_select_1").value;
-    const lang_2 = document.getElementById("language_select_2").value; 
+    const lang_2 = document.getElementById("language_select_2").value;
 
     const text = document.getElementById("translate_from_text").value;
+
+    document.getElementById("translate_to_text").innerHTML = "Processing..."
 
     if (text == "") {
         return
@@ -481,11 +485,6 @@ function sign_out() {
 
 // buttons mapped to functions when clicked
 
-const home_btn = document.getElementById("home_btn");
-home_btn.addEventListener("click", () => {
-    display_chat();
-})
-
 const send_message_btn = document.getElementById("send_message");
 send_message_btn.addEventListener("click", () => {
     send_message();
@@ -556,10 +555,35 @@ block_btn.addEventListener("click", () => {
     set_typing_to_block();
 })
 
+const email_submit_btn = document.getElementById("email_submit_btn");
+email_submit_btn.addEventListener("click", () => {
+    if(email_prompt.value != "") {
+        if (style != "" && length != "") {
+            send_email();
+        }   else    {
+            alert("Option not selected")
+        }
+    }
+})
+
+const email_prompt = document.getElementById("email_prompt");
+email_prompt.addEventListener("keypress", function(event) {
+    if(event.key === "Enter" && email_prompt.value != "") {
+        if (style != "" && length != "") {
+            send_email();
+        }   else    {
+            alert("Option not selected")
+        }
+    }
+})
+
 // Email Code
 
 function send_email() {
     var email_text = document.getElementById("email_prompt").value;
+
+    const result = document.getElementById("email_result");
+    result.innerHTML = "Processing..."
 
     fetch('/SendMail', {
         method: 'POST',
@@ -570,8 +594,7 @@ function send_email() {
     })
     .then(response => response.json())
     .then(data => {
-        const result = document.getElementById("email_result");
-        console.log(data.response);
+        
         result.innerHTML = data.response;
     })
 }
@@ -686,17 +709,6 @@ length_long.addEventListener("click", () => {
 
     length_long.style.backgroundColor = "white";
     length_long.style.color = "black";
-})
-
-const email_prompt = document.getElementById("email_prompt");
-email_prompt.addEventListener("keypress", function(event) {
-    if(event.key === "Enter" && email_prompt.value != "") {
-        if (style != "" && length != "") {
-            send_email();
-        }   else    {
-            alert("Option not selected")
-        }
-    }
 })
 
 // Misc Code

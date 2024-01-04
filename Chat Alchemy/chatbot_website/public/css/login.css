@@ -94,3 +94,9 @@ label {
     color:white;
     padding:10px;
 }
+
+#buttonDiv {
+    float: right;
+    margin-top: 1.5%;
+}
+

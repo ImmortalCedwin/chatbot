@@ -42,7 +42,10 @@ submit_btn.addEventListener("click", () => {
     .then(response => response.json())
     .then(data => {
         if (data.login_check == true) {
-            console.log(data.user);
+            sessionStorage.setItem("user_name", String(data.user_name));
+            sessionStorage.setItem("email", String(data.email));
+            sessionStorage.setItem("provider", String(data.provider));
+            sessionStorage.setItem("login_check", "true");
 
             window.location.href = "/ChatAlchemy"
         }   else    {
