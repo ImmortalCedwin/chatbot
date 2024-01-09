@@ -35,7 +35,7 @@ const { getAuth, signInWithCredential, GoogleAuthProvider,
 const { initializeApp } = require("firebase/app");
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBKQsL1Q9exxc-EcOdwcfusKjE90oKaOAA",
+    apiKey: "AIzaSyBKQsL1Q9exxc-EcOdwcfusKjE90oKaOAA", // this is the firebase api key
     authDomain: "chat-alchemy-fe455.firebaseapp.com",
     databaseURL: "https://chat-alchemy-fe455-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "chat-alchemy-fe455",
