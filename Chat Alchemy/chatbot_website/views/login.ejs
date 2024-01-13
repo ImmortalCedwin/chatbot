@@ -43,6 +43,7 @@
                     if (login) {
                         sessionStorage.setItem("user_name", String(data.user_name));
                         sessionStorage.setItem("email", String(data.email));
+                        sessionStorage.setItem("user_profile_image", data.user_profile_image);
                         sessionStorage.setItem("provider", String(data.provider));
                         sessionStorage.setItem("login_check", "true");
                         window.location.href = "/ChatAlchemy";

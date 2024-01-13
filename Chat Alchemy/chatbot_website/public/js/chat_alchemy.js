@@ -4,6 +4,7 @@ if (sessionStorage.getItem("login_check") == null || sessionStorage.getItem("log
 }   else    {
     var user_name = sessionStorage.getItem("user_name");
     var email = sessionStorage.getItem("email");
+    var user_profile_image = sessionStorage.getItem("user_profile_image");
     var provider = sessionStorage.getItem("provider");
 
     fetch("/GetSettings", {
@@ -58,7 +59,12 @@ function get_messages(mode_value) {
             if (i % 2 == 0) {
                 document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_ai'>" + mode_name + "</p>" + "<div class = 'message_ai'>" + messages[i-1] + "</div>");
             }   else    {
-                document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_human'>" + user_name + "</p>" + "<p class = 'message_human'>" + messages[i-1] + "</p>");
+                if (provider == "google.com") {
+                    document.getElementById("text_area").insertAdjacentHTML("beforeend", "<img class = 'user_image_google' src = '"+user_profile_image+"'>" + "<p class = 'subtext_human'>" + user_name + "</p>" + "<p class = 'message_human'>" + messages[i-1] + "</p>");
+                }
+                else {
+                    document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_human'>" + user_name + "</p>" + "<p class = 'message_human'>" + messages[i-1] + "</p>");
+                }
             }
         }
     })
@@ -86,7 +92,12 @@ function send_message() {
 
     var text = document.getElementById("user_input_message").value;
 
-    document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_human'>" + user_name + "</p>" + "<p class = 'message_human'>" + text + "</p>");
+    if (provider == "google.com") {
+        document.getElementById("text_area").insertAdjacentHTML("beforeend", "<img class = 'user_image_google' src = '"+user_profile_image+"'>" + "<p class = 'subtext_human'>" + user_name + "</p>" + "<p class = 'message_human'>" + text + "</p>");
+    }
+    else {
+        document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_human'>" + user_name + "</p>" + "<p class = 'message_human'>" + text + "</p>");
+    }
 
     // this is to create the "Typing..." message when the ai is processing
     const type = document.createElement('div');

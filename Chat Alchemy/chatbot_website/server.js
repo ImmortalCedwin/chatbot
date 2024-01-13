@@ -566,7 +566,7 @@ app.post("/AuthenticateUserGoogle", (req,res) => {
         
         add_user_to_database_google(user.displayName, user.email, user.providerData[0].providerId);
 
-        res.json({login_check:login_condition, user_name:user.displayName, email:user.email, provider:user.providerData[0].providerId});
+        res.json({login_check:login_condition, user_name:user.displayName, email:user.email, user_profile_image:user.photoURL, provider:user.providerData[0].providerId});
     })
     .catch((error) => {
 
