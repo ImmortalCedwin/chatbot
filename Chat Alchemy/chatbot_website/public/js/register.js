@@ -11,10 +11,6 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase()); 
 }
 
-login_btn.addEventListener("click", () => {
-    open_login_page();
-});
-
 function authenticate_registration(user_name, password, password_confirm, email) {
     if (user_name.length < 4) {
         return "Name must be atleast 4 characters long";
@@ -54,6 +50,7 @@ register_btn.addEventListener("click", () => {
                 console.log("user: " + data.user);
                 document.getElementById("register_form").reset()
                 alert("Account Created");
+                window.location.href = "/Login";
             }   else
             if (data.is_error == true)    {
                 alert(data.error_code);

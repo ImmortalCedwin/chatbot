@@ -1,6 +1,6 @@
 
 let i = 0;
-let text = "Chat Alchemy";
+let text = "CHAT ALCHEMY";
 let speed = 120;
 
 addEventListener("load", () => {
