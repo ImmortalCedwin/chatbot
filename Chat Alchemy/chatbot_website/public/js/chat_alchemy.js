@@ -136,7 +136,7 @@ function send_message() {
         switch (sessionStorage.getItem("typing_mode")) {
             case "type":
                 let index = 0;
-                const speed = 20;   // lower is faster
+                const speed = 10;   // lower is faster
                 var code_check = 0;
                 var html = "";
 
@@ -749,8 +749,8 @@ length_long.addEventListener("click", () => {
 
 // Misc Code
 
-var vid = document.getElementById("bg");
-vid.playbackRate = 0.8;
+// var vid = document.getElementById("bg");
+// vid.playbackRate = 0.8;
 
 var select_mode = document.getElementById("select_mode");
 var previous_mode = select_mode.value;

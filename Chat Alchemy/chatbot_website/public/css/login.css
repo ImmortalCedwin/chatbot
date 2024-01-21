@@ -3,6 +3,7 @@
     color:black;
     text-align: center;
     font-size: calc(3vh + 3vw);
+    font-family: "Helvetica";
 }
 
 body {
@@ -37,7 +38,7 @@ form {
     margin: 30px auto;
 
     padding: 40px;
-    background-color: rgba(0, 0, 0, 0.6); /* Set a transparent background color */
+    background-color: rgba(0, 0, 0, 0.8); /* Set a transparent background color */
     border-radius: 10px;
 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.75); /* Add a subtle box shadow */

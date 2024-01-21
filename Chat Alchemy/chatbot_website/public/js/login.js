@@ -1,7 +1,7 @@
 
 let i = 0;
-let text = "CHAT ALCHEMY";
-let speed = 120;
+let text = "Chat Alchemy";
+let speed = 100;
 
 addEventListener("load", () => {
     type_writer();
