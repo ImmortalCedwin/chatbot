@@ -1,7 +1,18 @@
 
 body {
-    background-color: grey;
+    margin: 0;
     font-family: "Cascadia Code";
+    /*background-color: grey; */
+}
+
+img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
 
 video {
@@ -14,10 +25,105 @@ video {
     z-index: -1;
 }
 
+/* combination of old and new nav */
+nav {
+    position: relative;
+    z-index: 1000;
+
+    background: linear-gradient(to right, rgba(41, 50, 65, 0.98), rgba(28, 31, 43, 0.98));
+
+    background-color: #191e24f5;
+
+    display: none;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 45px;
+    padding: 15px 50px;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+
+    color: white;
+}
+
+/* 
+new nav
+nav {
+    position: relative;
+    z-index: 1000;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, rgba(41, 50, 65, 0.98), rgba(28, 31, 43, 0.98));
+
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+
+    width: 100%;
+    overflow: hidden;
+} 
+*/
+
+.nav-container ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#nav-links li {
+    width: 40%;
+}
+
+#nav-links li a {
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 20px 10px;
+    transition: 0.5s;
+    color: black;
+
+    text-decoration: none;
+}
+
+#nav-links li a:hover {
+    color: black;
+   /* border-bottom: 4px #f1c40f solid; */
+    transition: 0.5s;
+}
+
+.hide {
+    top: 70px;
+}
+
+#title_mobile{
+    display: flex;
+    color: white;
+    align-items: center;
+    margin-left: 7px;
+
+}
+
+#title_mobile img{
+    margin-left: 10px;
+    max-height:30px;
+    max-width: 100%;
+}
+
 .background {
-    display: grid;
     grid-template-columns: 15% 84%;
     column-gap: 1%;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .chat_box {
@@ -26,13 +132,16 @@ video {
     grid-column-start: 2;
     grid-column-end: 2;
 
+    margin: 0 auto;
     display: grid;
     grid-template-rows: 90% auto;
     border:5px solid black;
     border-radius: 15px;
 
     height: 97vh;
-    width: 83vw;
+    width: 100%;
+    
+    box-sizing: border-box;
 
     float:right;
     background-color: rgba(30, 30, 30, 0.8);
@@ -208,7 +317,7 @@ video {
     border:3px solid black;
     border-radius: 15px;
 
-    height: 97vh;
+    height: 98vh;
     width: 83vw;
 
     float:right;
@@ -223,6 +332,8 @@ video {
 
     border:3px solid white;
     border-radius: 10px;
+
+    display: flex;
 
     height: 5vh;
     width: 73vw;
@@ -245,8 +356,10 @@ video {
     border: 3px solid black;
     border-radius: 15px;
 
+    display: flex;
+
     height: 2.5vh;
-    width: 71.5vw;
+    width: inherit;
 
     padding:10px;
     float:left;
@@ -264,6 +377,8 @@ video {
     height: 7vh;
     width: 5vw;
 
+    float: right;
+
     margin-top: 10px;
     margin-right: 40px;
 }
@@ -275,8 +390,6 @@ video {
     font-size: calc(0.7vh + 0.7vw);
 
     width: fit-content;
-
-    padding: 15px;
 
     height: 8vh;
     width: 7vw;
@@ -313,10 +426,12 @@ video {
     height: 9.2vh;
     width: 82vw;
 
+    gap: 10px;
+    display: flex;
     margin-left: 10px;
     margin-right: 10px;
 
-    margin-top: 2px;
+    margin-top: 12px;
     margin-bottom: 2px;
 
     border-radius: 10px;
@@ -334,10 +449,12 @@ video {
     height: 9.2vh;
     width: 82vw;
 
+    gap: 10px;
+    display: flex;
     margin-left: 10px;
     margin-right: 10px;
 
-    margin-top: 2px;
+    margin-top: 10px;
 
     border-radius: 10px;
 
@@ -349,6 +466,8 @@ video {
     grid-row-end:4;
     grid-column-start: 1;
     grid-column-end: span 2;
+
+    margin-top: 1%;
 
     background-color: rgba(0, 0, 0, 0.1);
 }
@@ -385,10 +504,11 @@ video {
     
     border: 3px solid black;
     border-radius: 10px;
-    margin-top: 13px;
-    margin-bottom: 13px;
-    margin-left: 5px;
-    margin-right: 5px;
+
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
 }
 
 .email_options_btn:hover {
@@ -622,14 +742,16 @@ video {
     grid-column-start: 1;
     grid-column-end: 1;
 
-    height: 97%;
-    width: inherit;
+    height: 98%;
+    width: 100%;
+    box-sizing: border-box;
 
     background-color: rgba(0, 0, 0, 0.80);
 
     border:3px solid gray;
     border-radius: 10px;
 
+    margin-bottom: 0%;
     
     overflow: auto;
 }
@@ -639,6 +761,9 @@ video {
     grid-row-end:2;
     grid-column-start: 1;
     grid-column-end: 1;
+
+    display: flex;
+    align-items: center; 
 
     border:3px solid black;
     border-radius: 10px;
@@ -665,7 +790,8 @@ video {
     border-radius: 15px;
 
     height: 2.5vh;
-    width: 70vw;
+    width: inherit;
+    box-sizing: border-box;
 
     padding:10px;
     float:left;
@@ -678,12 +804,14 @@ video {
 
     font-family: "Cascadia Code";
     font-size: calc(0.7vh + 0.7vw);
-    
-    padding: 10px;
+    font-weight: bold;
+
     float:right;
 
-    height: 5.5vh;
-    width: 7vw;
+    height: 5.9vh;
+    width: 10%;
+    box-sizing: border-box;
+    margin-left: 5px;
 
     border: 3px solid white;
     border-radius: 10px;
@@ -798,6 +926,8 @@ video {
     grid-row-end: 1;
     grid-column-start: 1;
     grid-column-end: 1;
+
+    display: grid;
 
     background-color: rgb(49, 49, 49, 0.7);
     height: 97vh;
@@ -1082,7 +1212,7 @@ video {
     background-color: rgba(173, 255, 47, 1);
 
     text-align: left;
-    font-size: calc(0.7vh + 0.7vw);
+    font-size: calc(0.8vh + 0.8vw);
 
     border: 2px solid black;
     border-radius: 20px 15px 0px 20px;
@@ -1103,7 +1233,7 @@ video {
     background-color: rgba(0, 0, 139, 1);
 
     text-align: left;
-    font-size: calc(0.7vh + 0.7vw);
+    font-size: calc(0.8vh + 0.8vw);
 
     border: 2px solid black;
     border-radius: 15px 20px 20px 0px;
@@ -1151,20 +1281,229 @@ video {
 
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
+    
+    .grid-container {
+        grid-template-columns: 1fr; /* Change to a single column layout on smaller screens */
+    }
+
     .side_bar {
         display: none;
     }
 
-    .chat_box {
-        grid-row-start: 1;
-        grid-row-end: 1;
-        grid-column-start: 1;
-        grid-column-end: span 2;
+    .menu {
+        grid-column: 1; /* Reset grid-column for menu and side_bar on smaller screens */
+    }
 
+    .chat_box, .debug_box, .email_box, .translate_box, .settings_box {
+        grid-column-start: 1;
+        grid-column-end: 2;
         width: 100%;
+        box-sizing: border-box;
+
+        border:5px solid black;
+        border-radius: 15px;
+    
+        height: 98vh;
+
     }
     
+    .background {
+        grid-template-columns: 100%; /* Adjust the grid template columns for full width */
+        column-gap: 0; /* No column gap */
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        float: right; /* Float the hamburger to the right */
+        margin: 15px; /* Adjust the margin as needed */
+        gap: 8px;
+        padding: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    
+    .lines {
+        display: block;
+        background-color: rgb(246, 2, 2);
+        height: 3px;
+        width: 36px;
+        border-radius: 3px;
+    }
+    
+    .lines-rotate {
+        background-color: rgb(46, 46, 46);
+        border-radius: 5px;
+    }
+
+    nav {
+        display: flex;
+        margin: 0;
+    }
+
+    ul {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -400px;
+        right: 0;
+        background-color: #f1c40f;
+        padding: 35px 0;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0px 5px 5px rgba(128, 128, 128, 0.363);
+    }
+
+    #nav-links li a {
+        color: rgba(12, 11, 11, 0.836);
+        font-weight: bold;
+    }
+
+    #nav-links li {
+        text-align: center;
+        width: 90vw;
+    }
+
+    #nav-links li a:hover {
+        font-weight: bolder;
+        color: #ea1c2d;
+        border: none;
+        letter-spacing: 3px;
+    }
+
+    .text_area {
+        width: 99%;
+        height:97%;
+    } 
+    
+    .email_result_box{
+        margin-bottom: 3px;
+        width: 95%;
+        height:93%;
+    }
+
+    .email_result {
+        font-size: calc(1.3vh + 0.93vw);
+    
+        width: 97%;
+        height: 60vh;
+    }
+
+    .email_options_btn {
+        gap: none;
+        font-size: calc(1.3vh + 0.9vw);
+    }
+
+    .email_style{
+        height: 9.2vh;
+        width: 95%;
+    }
+
+    .email_length{
+        height: 9.2vh;
+        width: 95%;
+    }
+
+    .user_input {
+       margin-top: 0;
+       margin-left: 0;
+       margin-right: 0;
+       margin-bottom: 0;
+       height: 90%;
+       
+       width: 100%;
+       box-sizing: border-box;
+    }
+
+
+    #user_input_message {
+        font-size: calc(1.5vh + 1vw);
+    
+        border: 3px solid black;
+        border-radius: 15px;
+    
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+
+        padding:10px;
+        float:left;
+        outline: none;
+    }
+    
+    .send_message {
+        font-size: calc(0.99vh + 0.9vw);
+        
+        float:right;
+    
+        height: 6.5vh;
+        width: 10%;
+        box-sizing: border-box;
+    
+        border: 3px solid white;
+        border-radius: 10px;
+        text-align: center;
+
+        outline: none;
+    }
+    
+    .send_message:hover {
+        color:black;
+        background-color: white;
+        border: 2px solid white;
+    }
+
+
+    .subtext_human {
+        font-size: calc(0.9vh + 0.9vw);
+        text-align: right;
+        margin-bottom: 2px;
+
+        margin-right: 17px;
+        margin-left:auto;
+        margin-top: 25px;
+        float: right;
+ 
+    }
+    
+    .subtext_ai {
+        font-size: calc(0.9vh + 0.9vw);
+        margin-bottom: 7px;
+    }
+    
+    .user_image_google {
+        float: right;
+        width: 5%;
+        border-radius: 50%;
+    
+        margin-top: 12px;
+        margin-right: 15px;
+    }
+
+    .message_human {
+        text-align: left;
+        font-size: calc(1.3vh + 0.9vw);
+    
+        border-radius: 20px 15px 0px 20px;
+
+        padding: 13px;
+    
+        margin-top: 53px;
+    }
+    .message_ai{
+        text-align: left;
+        font-size: calc(1.3vh + 0.9vw);
+    
+        border-radius: 20px 15px 0px 20px;
+
+        padding: 13px;
+    
+        margin-top:5px;
+    }
+
 }
 
 ::-webkit-scrollbar {

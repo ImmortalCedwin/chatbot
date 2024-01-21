@@ -506,6 +506,11 @@ debug_btn.addEventListener("click", () => {
     display_debug();
 });
 
+const debug_btn_mobile = document.getElementById("debug_btn_mobile")
+debug_btn_mobile.addEventListener("click", () => {
+    display_debug();
+});
+
 const submit_btn = document.getElementById("submit_btn");
 submit_btn.addEventListener("click", () => {
     debug();
@@ -541,8 +546,18 @@ email_generator_btn.addEventListener("click", () => {
     display_email_generator();
 })
 
+const email_generator_btn_mobile = document.getElementById("email_generator_btn_mobile");
+email_generator_btn_mobile.addEventListener("click", () => {
+    display_email_generator();
+})
+
 const translate_btn = document.getElementById("translate_btn");
 translate_btn.addEventListener("click", () => {
+    display_translation()
+})
+
+const translate_btn_mobile = document.getElementById("translate_btn_mobile");
+translate_btn_mobile.addEventListener("click", () => {
     display_translation()
 })
 
@@ -551,8 +566,18 @@ sign_out_btn.addEventListener("click", () => {
     sign_out();
 })
 
+const sign_out_btn_mobile = document.getElementById("sign_out_btn_mobile");
+sign_out_btn_mobile.addEventListener("click", () => {
+    sign_out();
+})
+
 const settings_btn = document.getElementById("settings_btn");
 settings_btn.addEventListener("click", () => {
+    display_settings();
+})
+
+const settings_btn_mobile = document.getElementById("settings_btn_mobile");
+settings_btn_mobile.addEventListener("click", () => {
     display_settings();
 })
 
@@ -725,7 +750,7 @@ length_long.addEventListener("click", () => {
 // Misc Code
 
 var vid = document.getElementById("bg");
-vid.playbackRate = 1;
+vid.playbackRate = 0.8;
 
 var select_mode = document.getElementById("select_mode");
 var previous_mode = select_mode.value;
@@ -740,6 +765,12 @@ select_mode.addEventListener("click", () => {
     }
 })
 
+var select_mode_mobile = document.getElementById("select_mode_mobile");
+
+select_mode_mobile.addEventListener("click", () => {
+    display_chat();
+})
+
 const user_input_message = document.getElementById("user_input_message");
 
 user_input_message.addEventListener("keypress", function(event) {
@@ -747,3 +778,20 @@ user_input_message.addEventListener("keypress", function(event) {
         send_message();
     }
 });
+
+let hamburger = document.querySelector('.hamburger');
+let navLinks = document.getElementById('nav-links');
+let links = document.querySelectorAll('.links');
+
+//Display links onclick on hamburger
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('hide');
+    hamburger.classList.toggle('lines-rotate');
+});
+
+//Hide navlink Container onClick any single link
+for(let i = 0; i < links.length; i++){
+    links[i].addEventListener('click', () => {
+        navLinks.classList.toggle('hide');
+    });
+} 
