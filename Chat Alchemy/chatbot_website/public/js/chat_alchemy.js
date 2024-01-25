@@ -136,7 +136,7 @@ function send_message() {
         switch (sessionStorage.getItem("typing_mode")) {
             case "type":
                 let index = 0;
-                const speed = 10;   // lower is faster
+                const speed = 2;   // lower is faster
                 var code_check = 0;
                 var html = "";
 

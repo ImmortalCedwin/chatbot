@@ -354,9 +354,9 @@ async function get_user_name(email) {
 
     const user_ref = db.collection("Users");
 
-    const name_ref = user_ref.where("email", "==", email);
+    const name_ref = await user_ref.where("Email", "==", email).get();
 
-    return name_ref
+    return name_ref.docs[0].data().Username
 }
 
 async function add_user_to_database_email(username,email,password,provider) {
@@ -595,10 +595,10 @@ app.post("/AuthenticateUserEmail", (req,res) => {
     const provider = "password";
 
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
         //const user = userCredential.user;
 
-        var user_name = get_user_name(email);
+        var user_name = await get_user_name(email);
 
         login_condition = true;
 
