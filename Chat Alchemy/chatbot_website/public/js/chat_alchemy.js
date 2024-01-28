@@ -318,6 +318,8 @@ function debug() {
 
     const code = document.getElementById("debug_code_text").value;
 
+    document.getElementById("debug_solution_text").innerHTML = "Processing..."
+
     if (code == "") {
         return
     }

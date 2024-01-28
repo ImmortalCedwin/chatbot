@@ -222,7 +222,7 @@ async function debug_code(code) {
         safetySettings = ai.safety_settings;
         
         const parts = [
-            {text: "debug and improve the following code.\n\n"},
+            {text: "debug and improve the following code.  only reply with the solution.\n\n"},
         ];
 
         parts.push({text: `${code}`},)

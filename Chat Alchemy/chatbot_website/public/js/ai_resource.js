@@ -402,7 +402,7 @@ const parts = [
 ];
 
 function input_code(input) {
-    return `debug and improve the following code.
+    return `debug and improve the following code. only reply with the solution.
 
     ${input}`
 }
