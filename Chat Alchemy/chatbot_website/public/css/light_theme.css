@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: "Cascadia Code";
-    background-color: black;
+    background-color: white;
 }
 
 nav {
@@ -50,7 +50,7 @@ nav {
 
 .grid-container{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-template-rows: auto;
     height: 100vh;
     overflow: hidden;
@@ -74,7 +74,7 @@ nav {
     box-sizing: border-box;
 
     float:right;
-    background-color: black;
+    background-color: white;
 }
 
 .debug_box {
@@ -86,14 +86,14 @@ nav {
     display: grid;
     grid-template-rows: 90% auto;
 
-    border:3px solid black;
+    border:3px solid white;
     border-radius: 15px;
 
     height: 97vh;
     width: 83vw;
 
     float:right;
-    background-color: black;
+    background-color: white;
 }
 
 /* i need to use this container for the span to work */
@@ -112,8 +112,8 @@ nav {
 .debug_code_text {
     font-size: calc(0.7vh + 0.7vw);
 
-    color: white;
-    background-color: rgb(20, 20, 20);
+    color: black;
+    background-color: rgb(220, 220, 220);
 
     border: 3px solid white;
     border-radius: 15px;
@@ -142,8 +142,8 @@ nav {
 .debug_solution_text {
     font-size: calc(0.7vh + 0.7vw);
 
-    color: white;
-    background-color: rgb(20, 20, 20);
+    color: black;
+    background-color: rgb(220, 220, 220);
 
     border: 3px solid white;
     border-radius: 15px;
@@ -168,10 +168,10 @@ nav {
     height: 6vh;
     width: 25vw;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
     
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 3px solid black;
     border-radius: 10px;
     margin: 20px;
     margin-left: 30px;
@@ -180,7 +180,9 @@ nav {
 .submit_btn:hover {
     color: white;
     background-color: black;
-    border: 3px solid white;
+    border: 3px solid black;
+
+    transition: 0.5s;
 }
 
 .clear_btn {
@@ -194,10 +196,10 @@ nav {
     height: 6vh;
     width: 25vw;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
     
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 3px solid black;
     border-radius: 10px;
     margin: 20px;
 }
@@ -205,7 +207,9 @@ nav {
 .clear_btn:hover {
     color: white;
     background-color: black;    
-    border: 3px solid white;
+    border: 3px solid black;
+
+    transition: 0.5s;
 }
 
 
@@ -220,10 +224,10 @@ nav {
     height: 6vh;
     width: 25vw;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
     
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 3px solid black;
     border-radius: 10px;
     margin: 20px;
 }
@@ -231,7 +235,9 @@ nav {
 .copy_btn:hover {
     color: white;
     background-color: black;
-    border: 3px solid white;
+    border: 3px solid black;
+
+    transition: 0.5s;
 }
 
 .email_box {
@@ -244,14 +250,14 @@ nav {
 
     display: grid;
 
-    border:3px solid black;
+    border:3px solid white;
     border-radius: 15px;
 
     height: 98vh;
     width: 83vw;
 
     float:right;
-    background-color: black;
+    background-color: white;
 }
 
 .email_prompt_box {
@@ -260,7 +266,7 @@ nav {
     grid-column-start: 1;
     grid-column-end: 1;
 
-    border:3px solid white;
+    border:3px solid black;
     border-radius: 10px;
 
     display: flex;
@@ -273,17 +279,17 @@ nav {
     margin-top: 10px;
     margin-left: 10px;
 
-    background-color: black;
+    background-color: white;
 }
 
 .email_prompt {
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 
     font-family: "Cascadia Code";
     font-size: calc(0.8vh + 0.8vw);
 
-    border: 3px solid black;
+    border: 3px solid white;
     border-radius: 15px;
 
     display: flex;
@@ -314,8 +320,8 @@ nav {
 }
 
 .email_submit_btn {
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 
     font-size: calc(0.7vh + 0.7vw);
 
@@ -324,14 +330,16 @@ nav {
     height: 8vh;
     width: 7vw;
     
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 3px solid black;
     border-radius: 10px;
 }
 
 .email_submit_btn:hover {
     color: white;
     background-color: black;
-    border: 3px solid white;
+    border: 3px solid black;
+
+    transition: 0.5s;
 }
 
 .email_submit_btn:active {
@@ -366,7 +374,7 @@ nav {
 
     border-radius: 10px;
 
-    background-color: rgba(150, 150, 150, 0.4)
+    background-color: rgb(220, 220, 220);
     
 }
 
@@ -388,7 +396,7 @@ nav {
 
     border-radius: 10px;
 
-    background-color: rgba(150, 150, 150, 0.4)
+    background-color: rgb(220, 220, 220);
 }
 
 .email_result_box {
@@ -399,16 +407,16 @@ nav {
 
     margin-top: 1%;
 
-    background-color: black;
+    background-color: white;
 }
 
 .email_result {
     font-size: calc(0.7vh + 0.7vw);
 
-    color: white;
-    background-color: rgb(20, 20, 20);
+    color: black;
+    background-color: rgb(220, 220, 220);;
 
-    border: 3px solid white;
+    border: 3px solid black;
     border-radius: 15px;
     outline: none;
 
@@ -423,8 +431,8 @@ nav {
 }
 
 .email_options_btn {
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 
     font-size: calc(0.7vh + 0.7vw);
 
@@ -444,7 +452,7 @@ nav {
 .email_options_btn:hover {
     color: white;
     background-color: black;
-    border: 3px solid white;
+    border: 3px solid black;
 }
 
 .email_options_btn:active {
@@ -463,14 +471,14 @@ nav {
 
     display: grid;
 
-    border:3px solid black;
+    border:3px solid white;
     border-radius: 15px;
 
     height: 97vh;
     width: 83vw;
 
     float:right;
-    background-color: black;
+    background-color: white;
 }
 
 .language_select_1 {
@@ -483,8 +491,8 @@ nav {
 
     width: 52vw;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 
     padding: 10px;
 
@@ -492,8 +500,6 @@ nav {
     margin-bottom: 15px;
     margin-left: 15px;
     margin-right: 15px;
-
-    box-shadow: -1px 1px 2px 0px white;
 
     border: 3px solid black;
     border-radius: 20px;
@@ -509,8 +515,8 @@ nav {
 
     font-size: calc(0.7vh + 0.7vw);
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 
     padding: 10px;
 
@@ -518,8 +524,6 @@ nav {
     margin-bottom: 15px;
     margin-left: 15px;
     margin-right: 15px;
-
-    box-shadow: -1px 1px 2px 0px white;
 
     border: 3px solid black;
     border-radius: 20px;
@@ -543,7 +547,7 @@ nav {
     font-size: calc(0.7vh + 0.7vw);
 
     color: white;
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(220, 220, 220);
 
     border: 3px solid white;
     border-radius: 15px;
@@ -573,7 +577,7 @@ nav {
     font-size: calc(0.7vh + 0.7vw);
 
     color: white;
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(220, 220, 220);
 
     border: 3px solid white;
     border-radius: 15px;
@@ -598,10 +602,10 @@ nav {
     height: 6vh;
     width: 25vw;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
     
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 3px solid black;
     border-radius: 10px;
     margin: 15px;
     margin-left: 20px;
@@ -610,7 +614,9 @@ nav {
 .translate_submit_btn:hover {
     color: white;
     background-color: black;
-    border: 3px solid white;
+    border: 3px solid black;
+
+    transition: 0.5s;
 }
 
 .translate_clear_btn {
@@ -624,10 +630,10 @@ nav {
     height: 6vh;
     width: 25vw;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
     
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 3px solid black;
     border-radius: 10px;
     margin: 15px;
     margin-right: 30px;
@@ -636,7 +642,9 @@ nav {
 .translate_clear_btn:hover {
     color: white;
     background-color: black;
-    border: 3px solid white;
+    border: 3px solid black;
+
+    transition: 0.5s;
 }
 
 .translate_copy_btn {
@@ -650,10 +658,10 @@ nav {
     height: 6vh;
     width: 25vw;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
     
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 3px solid black;
     border-radius: 10px;
     margin: 15px;
     margin-left: 30px;
@@ -662,7 +670,9 @@ nav {
 .translate_copy_btn:hover {
     color: white;
     background-color: black;
-    border: 3px solid white;
+    border: 3px solid black;
+
+    transition: 0.5s;
 }
 
 .text_area {
@@ -675,6 +685,8 @@ nav {
     width: 100%;
     box-sizing: border-box;
 
+    border-radius: 10px;
+
     margin-bottom: 0%;
     
     overflow: auto;
@@ -683,7 +695,7 @@ nav {
 .text_image {
     border-radius: 10px;
 
-    background-image: url("../resources/chat_background_blue.jpg");
+    background-image: url("../resources/chat_background_white.jpg");
     
     background-repeat: no-repeat;
     background-size: cover;
@@ -702,7 +714,7 @@ nav {
     display: flex;
     align-items: center; 
 
-    border:3px solid black;
+    border:3px solid white;
     border-radius: 10px;
 
     height: 5.5vh;
@@ -713,19 +725,20 @@ nav {
     margin-left: 10px;
     margin-right: 10px;
 
-    background-color: black;
+    background-color: white;
 }
 
 
 
 #user_input_message {
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 
     font-family: "Cascadia Code";
     font-size: calc(0.8vh + 0.8vw);
 
-    border: 3px solid black;
+    border: none;
+    border-bottom: 3px dotted black;
 
     height: 2.5vh;
     width: inherit;
@@ -740,12 +753,12 @@ nav {
 
 #user_input_message:focus {
     transition: 0.8s;
-    border-bottom: 3px dotted white;
+    border-bottom: 3px solid black;
 }
 
 .send_message {
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
 
     font-family: "Cascadia Code";
     font-size: calc(0.7vh + 0.7vw);
@@ -758,15 +771,15 @@ nav {
     box-sizing: border-box;
     margin-left: 5px;
 
-    border: 3px solid white;
+    border: 3px solid black;
     border-radius: 10px;
 }
 
 .send_message:hover {
     transition: 0.8s;
-    color:black;
-    background-color: white;
-    border: 3px solid white;
+    color:white;
+    background-color: black;
+    border: 3px solid black;
 }
 
 .settings_box {
@@ -777,14 +790,14 @@ nav {
 
     display: grid;
 
-    border:3px solid black;
+    border:3px solid white;
     border-radius: 15px;
 
     height: 97vh;
     width: 83vw;
 
     float:right;
-    background-color: black;
+    background-color: white;
 }
 
 .settings_content {
@@ -797,9 +810,11 @@ nav {
 
     display: grid;
 
-    background-color: rgb(20, 20, 20);
-    border:3px solid white;
-    border-radius: 10px;
+    background-color: rgb(220, 220, 220);
+
+    border:3px solid black;
+    border-radius: 15px;
+
     margin:10px;
 }
 
@@ -811,7 +826,7 @@ nav {
 
     font-size: calc(0.7vh + 0.7vw);
 
-    color: white;
+    color: black;
 
     padding: 10px;
 
@@ -831,7 +846,7 @@ nav {
     color: white;
     background-color: black;
 
-    border: 3px solid white;
+    border: 3px solid black;
     border-radius: 10px;
 
     margin: 10px;
@@ -840,7 +855,7 @@ nav {
 .typing_btn:hover {
     color: black;
     background-color: white;
-    border: 3px solid white;
+    border: 3px solid black;
 }
 
 .block_btn {
@@ -854,7 +869,7 @@ nav {
     color: white;
     background-color: black;
 
-    border: 3px solid white;
+    border: 3px solid black;
     border-radius: 10px;
 
     margin: 10px;
@@ -863,7 +878,7 @@ nav {
 .block_btn:hover {
     color: black;
     background-color: white;
-    border: 3px solid white;
+    border: 3px solid black;
 }
 
 .theme {
@@ -874,7 +889,7 @@ nav {
 
     font-size: calc(0.7vh + 0.7vw);
 
-    color: white;
+    color: black;
 
     padding: 10px;
 
@@ -892,8 +907,8 @@ nav {
     width: 30vw;
     height: 6vh;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 
     padding: 10px;
 
@@ -913,7 +928,7 @@ nav {
 
     margin: 10px;
 
-    background-color: black;
+    background-color: white;
     height: 97vh;
     width: 15vw;
     border-radius: 15px;
@@ -922,12 +937,12 @@ nav {
 .menu {
     display: grid;
 
-    background-color: black;
+    background-color: white;
 
     height: inherit;
     width: inherit;
 
-    border: 3px solid black;
+    border: 3px solid rgb(255, 255, 255);
     border-radius: 10px;
     
 }
@@ -943,7 +958,7 @@ nav {
 
     font-size: calc(1.1vh + 1.1vw);
 
-    color:orangered;
+    color:black;
 
     text-align: center; 
 
@@ -964,8 +979,8 @@ nav {
 
     font-size: calc(0.8vh + 0.8vw);
 
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
 
     text-align: center; 
 
@@ -982,8 +997,8 @@ nav {
     height: 5vh;
     width: 10vw;
 
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 
     font-size: calc(0.7vh + 0.7vw);
 
@@ -1002,7 +1017,7 @@ nav {
     grid-column-end: 1;
 
     color:black;
-    background-color: orangered;
+    background-color: white;
 
     text-align: center;
     font-size: calc(0.7vh + 0.7vw);
@@ -1017,8 +1032,9 @@ nav {
 }
 
 .delete_messages_btn:hover {
-    color:black;
-    border: 2px solid orangered;
+    color:white;
+    background-color: black;
+    border: 2px solid black;
 
     transition: 0.3s;
     letter-spacing: 2px;
@@ -1037,7 +1053,7 @@ nav {
 
     border-radius: 20px;
 
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(220, 220, 220);
 
     text-align: center;
 }
@@ -1050,7 +1066,7 @@ nav {
 
     font-size: calc(1vh + 1vw);
 
-    color:white;
+    color:black;
 
     margin-top:10px;
 }
@@ -1061,12 +1077,12 @@ nav {
     grid-column-start: 1;
     grid-column-end: 1;
 
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
 
     font-size: calc(0.7vh + 0.7vw);
 
-    border: 2px solid white;
+    border: 2px solid black;
     border-radius: 20px;
 
     margin:0 auto;
@@ -1078,9 +1094,9 @@ nav {
 }
 
 .debug_btn:hover {
-    color:black;
-    background-color: white;
-    border: 2px solid white;
+    color:white;
+    background-color: black;
+    border: 2px solid black;
 
     transition: 0.3s;
     letter-spacing: 2px;
@@ -1092,12 +1108,12 @@ nav {
     grid-column-start: 1;
     grid-column-end: 1;
 
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
 
     font-size: calc(0.7vh + 0.7vw);
 
-    border: 2px solid white;
+    border: 2px solid black;
     border-radius: 20px;
 
     margin:0 auto;
@@ -1109,9 +1125,9 @@ nav {
 }
 
 .email_generator_btn:hover {
-    color:black;
-    background-color: white;
-    border: 2px solid white;
+    color:white;
+    background-color: black;
+    border: 2px solid black;
 
     transition: 0.3s;
     letter-spacing: 2px;
@@ -1123,12 +1139,12 @@ nav {
     grid-column-start: 1;
     grid-column-end: 1;
 
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
 
     font-size: calc(0.7vh + 0.7vw);
 
-    border: 2px solid white;
+    border: 2px solid black;
     border-radius: 20px;
 
     margin:0 auto;
@@ -1140,9 +1156,9 @@ nav {
 }
 
 .translate_btn:hover {
-    color:black;
-    background-color: white;
-    border: 2px solid white;
+    color:white;
+    background-color: black;
+    border: 2px solid black;
 
     transition: 0.3s;
     letter-spacing: 2px;
@@ -1185,12 +1201,12 @@ nav {
     grid-column-start: 1;
     grid-column-end: 1;
 
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
 
     font-size: calc(0.7vh + 0.7vw);
 
-    border: 2px solid white;
+    border: 2px solid black;
     border-radius: 10px;
 
     margin:0 auto;
@@ -1202,9 +1218,9 @@ nav {
 }
 
 .settings_btn:hover {
-    color:black;
-    background-color: white;
-    border: 2px solid white;
+    color:white;
+    background-color: black;
+    border: 2px solid black;
 
     transition: 0.3s;
     letter-spacing: 2px;
@@ -1237,8 +1253,8 @@ nav {
 }
 
 .message_ai {
-    color: white;
-    background-color: rgba(0, 0, 139, 0.8);
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
 
     text-align: left;
     font-size: calc(0.8vh + 0.8vw);
@@ -1262,7 +1278,7 @@ nav {
 }
 
 .subtext_human {
-    color: white;
+    color: black;
     
     font-size: calc(0.6vh + 0.6vw);
     text-align: right;
@@ -1274,7 +1290,7 @@ nav {
 }
 
 .subtext_ai {
-    color: white;
+    color: black;
 
     font-size: calc(0.6vh + 0.6vw);
     text-align: left;

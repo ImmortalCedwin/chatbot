@@ -697,7 +697,6 @@ onAuthStateChanged(auth, (user) => {
 
 })
 
-// to do : check if you can use doc instead of new_doc
 app.post("/UpdateTypingMode", async (req,res) => {
     
     const user_name = req.body.user_name;
@@ -729,6 +728,34 @@ app.post("/GetSettings", async (req,res) => {
         res.json({typing_mode:doc.data()["Typing Mode"]});
     }
 
+})
+
+app.post("/GetTheme", async (req,res) => {
+    const user_name = req.body.user_name;
+
+    const theme_ref = db.collection("Users").doc(user_name).collection("Settings").doc("Theme");
+
+    const doc = await theme_ref.get();
+
+    if(!doc.exists) {
+        theme_ref.set({
+            "Theme":"Default"
+        })
+    }   else    {
+        res.json({theme:doc.data()["Theme"]});
+    }
+})
+
+app.post("/UpdateTheme", async (req,res) => {
+    const user_name = req.body.user_name;
+    const new_theme = req.body.new_theme;
+
+    const theme_ref = db.collection("Users").doc(user_name).collection("Settings").doc("Theme");
+
+    const doc = await theme_ref.update({"Theme":new_theme});
+    const new_doc = await theme_ref.get();
+
+    res.json({theme:new_doc.data()["Theme"]});
 })
 
 app.listen(process.env.PORT || 3000);

@@ -18,6 +18,24 @@ if (sessionStorage.getItem("login_check") == null || sessionStorage.getItem("log
     .then(data => {
         sessionStorage.setItem("typing_mode", String(data.typing_mode));
     })
+
+    fetch("/GetTheme", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify({user_name})
+    })
+    .then(response => response.json())
+    .then(data => {
+        sessionStorage.setItem("theme", String(data.theme));
+        if (data.theme == "Light") {
+            change_style("css/light_theme.css")
+        }   else
+        if (data.theme == "Default") {
+            change_style("css/chat_alchemy.css");
+        }
+    })
 }
 
 // it loads all the pages by default so im hiding the other pages
@@ -268,6 +286,22 @@ function set_typing_to_block() {
     }
 }
 
+function update_theme(new_theme) {
+
+    fetch("/UpdateTheme", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify({user_name,new_theme})
+    })
+    .then(response => response.json())
+    .then(data => {
+        sessionStorage.setItem("theme", String(data.theme));
+    })
+
+}
+
 function translate() {
 
     const lang_1 = document.getElementById("language_select_1").value;
@@ -475,6 +509,10 @@ function display_settings() {
             block.style.color = "black";
         }
     })
+
+    var theme = sessionStorage.getItem("theme");
+    const theme_select = document.getElementById("select_theme");
+    theme_select.value = theme;
 }
 
 function sign_out() {
@@ -615,6 +653,22 @@ email_prompt.addEventListener("keypress", function(event) {
     }
 })
 
+function change_style(theme) {
+    document.getElementById("style_sheet").setAttribute("href", theme);
+}
+
+const style_sheet = document.getElementById("select_theme")
+style_sheet.addEventListener("change", () => {
+    if (style_sheet.value == "Light") {
+        change_style("css/light_theme.css")
+        update_theme("Light")
+    }   else
+    if (style_sheet.value == "Default") {
+        change_style("css/chat_alchemy.css");
+        update_theme("Default")
+    }
+})
+
 // Email Code
 
 function send_email() {
@@ -646,13 +700,25 @@ style_professional.addEventListener("click", () => {
 
     const all_btn = document.getElementsByClassName("email_options_btn");
 
-    for(let i = 0; i <= 3; i++) {
-        all_btn[i].style.backgroundColor = "black";
-        all_btn[i].style.color = "white";
+    if (sessionStorage.getItem("theme") == "Light") {
+        for(let i = 0; i <= 3; i++) {
+            all_btn[i].style.backgroundColor = "white";
+            all_btn[i].style.color = "black";
+        }
+    
+        style_professional.style.backgroundColor = "black";
+        style_professional.style.color = "white";
+    }   else    {
+        for(let i = 0; i <= 3; i++) {
+            all_btn[i].style.backgroundColor = "black";
+            all_btn[i].style.color = "white";
+        }
+    
+        style_professional.style.backgroundColor = "white";
+        style_professional.style.color = "black";
     }
 
-    style_professional.style.backgroundColor = "white";
-    style_professional.style.color = "black";
+    
 
 })
 
@@ -662,13 +728,23 @@ style_casual.addEventListener("click", () => {
 
     const all_btn = document.getElementsByClassName("email_options_btn");
 
-    for(let i = 0; i <= 3; i++) {
-        all_btn[i].style.backgroundColor = "black";
-        all_btn[i].style.color = "white";
+    if (sessionStorage.getItem("theme") == "Light") {
+        for(let i = 0; i <= 3; i++) {
+            all_btn[i].style.backgroundColor = "white";
+            all_btn[i].style.color = "black";
+        }
+    
+        style_casual.style.backgroundColor = "black";
+        style_casual.style.color = "white";    
+    }   else    {
+        for(let i = 0; i <= 3; i++) {
+            all_btn[i].style.backgroundColor = "black";
+            all_btn[i].style.color = "white";
+        }
+    
+        style_casual.style.backgroundColor = "white";
+        style_casual.style.color = "black";    
     }
-
-    style_casual.style.backgroundColor = "white";
-    style_casual.style.color = "black";
 
 })
 
@@ -678,14 +754,24 @@ style_informational.addEventListener("click", () => {
 
     const all_btn = document.getElementsByClassName("email_options_btn");
 
-    for(let i = 0; i <= 3; i++) {
-        all_btn[i].style.backgroundColor = "black";
-        all_btn[i].style.color = "white";
+    if (sessionStorage.getItem("theme") == "Light") {
+        for(let i = 0; i <= 3; i++) {
+            all_btn[i].style.backgroundColor = "white";
+            all_btn[i].style.color = "black";
+        }
+    
+        style_informational.style.backgroundColor = "black";
+        style_informational.style.color = "white";    
+    }   else    {
+        for(let i = 0; i <= 3; i++) {
+            all_btn[i].style.backgroundColor = "black";
+            all_btn[i].style.color = "white";
+        }
+    
+        style_informational.style.backgroundColor = "white";
+        style_informational.style.color = "black";
     }
-
-    style_informational.style.backgroundColor = "white";
-    style_informational.style.color = "black";
-
+    
 })
 
 const style_funny = document.getElementById("style_funny");
@@ -694,13 +780,23 @@ style_funny.addEventListener("click", () => {
 
     const all_btn = document.getElementsByClassName("email_options_btn");
 
-    for(let i = 0; i <= 3; i++) {
-        all_btn[i].style.backgroundColor = "black";
-        all_btn[i].style.color = "white";
+    if (sessionStorage.getItem("theme") == "Light") {
+        for(let i = 0; i <= 3; i++) {
+            all_btn[i].style.backgroundColor = "white";
+            all_btn[i].style.color = "black";
+        }
+    
+        style_funny.style.backgroundColor = "black";
+        style_funny.style.color = "white";    
+    }   else    {
+        for(let i = 0; i <= 3; i++) {
+            all_btn[i].style.backgroundColor = "black";
+            all_btn[i].style.color = "white";
+        }
+    
+        style_funny.style.backgroundColor = "white";
+        style_funny.style.color = "black";
     }
-
-    style_funny.style.backgroundColor = "white";
-    style_funny.style.color = "black";
 
 })
 
@@ -710,13 +806,24 @@ length_short.addEventListener("click", () => {
 
     const all_btn = document.getElementsByClassName("email_options_btn");
 
-    for(let i = 4; i <= 6; i++) {
-        all_btn[i].style.backgroundColor = "black";
-        all_btn[i].style.color = "white";
+    if (sessionStorage.getItem("theme") == "Light") {
+        for(let i = 4; i <= 6; i++) {
+            all_btn[i].style.backgroundColor = "white";
+            all_btn[i].style.color = "black";
+        }
+    
+        length_short.style.backgroundColor = "black";
+        length_short.style.color = "white";    
+    }   else    {
+        for(let i = 4; i <= 6; i++) {
+            all_btn[i].style.backgroundColor = "black";
+            all_btn[i].style.color = "white";
+        }
+    
+        length_short.style.backgroundColor = "white";
+        length_short.style.color = "black";
     }
-
-    length_short.style.backgroundColor = "white";
-    length_short.style.color = "black";
+    
 })
 
 const length_medium = document.getElementById("length_medium");
@@ -725,13 +832,24 @@ length_medium.addEventListener("click", () => {
 
     const all_btn = document.getElementsByClassName("email_options_btn");
 
-    for(let i = 4; i <= 6; i++) {
-        all_btn[i].style.backgroundColor = "black";
-        all_btn[i].style.color = "white";
+    if (sessionStorage.getItem("theme") == "Light") {
+        for(let i = 4; i <= 6; i++) {
+            all_btn[i].style.backgroundColor = "white";
+            all_btn[i].style.color = "black";
+        }
+    
+        length_medium.style.backgroundColor = "black";
+        length_medium.style.color = "white";    
+    }   else    {
+        for(let i = 4; i <= 6; i++) {
+            all_btn[i].style.backgroundColor = "black";
+            all_btn[i].style.color = "white";
+        }
+    
+        length_medium.style.backgroundColor = "white";
+        length_medium.style.color = "black";
     }
-
-    length_medium.style.backgroundColor = "white";
-    length_medium.style.color = "black";
+    
 })
 
 const length_long = document.getElementById("length_long");
@@ -740,19 +858,27 @@ length_long.addEventListener("click", () => {
 
     const all_btn = document.getElementsByClassName("email_options_btn");
 
-    for(let i = 4; i <= 6; i++) {
-        all_btn[i].style.backgroundColor = "black";
-        all_btn[i].style.color = "white";
+    if (sessionStorage.getItem("theme") == "Light") {
+        for(let i = 4; i <= 6; i++) {
+            all_btn[i].style.backgroundColor = "white";
+            all_btn[i].style.color = "black";
+        }
+    
+        length_long.style.backgroundColor = "black";
+        length_long.style.color = "white";    
+    }   else    {
+        for(let i = 4; i <= 6; i++) {
+            all_btn[i].style.backgroundColor = "black";
+            all_btn[i].style.color = "white";
+        }
+    
+        length_long.style.backgroundColor = "white";
+        length_long.style.color = "black";    
     }
 
-    length_long.style.backgroundColor = "white";
-    length_long.style.color = "black";
 })
 
 // Misc Code
-
-// var vid = document.getElementById("bg");
-// vid.playbackRate = 0.8;
 
 var select_mode = document.getElementById("select_mode");
 var previous_mode = select_mode.value;
