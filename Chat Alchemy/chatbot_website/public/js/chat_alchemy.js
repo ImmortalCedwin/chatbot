@@ -59,6 +59,8 @@ function get_mode() {
     return mode_value
 }
 
+var message_exists;
+
 function get_messages(mode_value) {
 
     var mode_name = get_mode()
@@ -73,6 +75,14 @@ function get_messages(mode_value) {
     .then(response => response.json())
     .then(data => {
         const messages = data.messages;
+        if (messages.length == 0) {
+            message_exists = "no";
+            text_info.style.display = "block";
+        }   else    {
+            message_exists = "yes"
+            text_info.style.display = "none";
+        }
+
         for(let i = 1; i <= messages.length; i++) {
             if (i % 2 == 0) {
                 document.getElementById("text_area").insertAdjacentHTML("beforeend", "<p class = 'subtext_ai'>" + mode_name + "</p>" + "<div class = 'message_ai'>" + messages[i-1] + "</div>");
@@ -93,6 +103,7 @@ window.onload = function load_messages() {
         window.location.href = "/Login";
     }   else    {
         get_messages(get_mode());
+        text_info_generator();
     }
 }
 
@@ -102,9 +113,18 @@ mode.addEventListener("change", () => {
     var mode_value = get_mode();
 
     get_messages(mode_value);
+
+    const text_info = document.getElementById("text_info");
+    text_info.innerHTML = "";
+    
+    text_info_generator();
 })
 
 function send_message() {
+
+    if (message_exists == "no") {
+        text_info.style.display = "none";
+    }
 
     const mode_value = document.getElementById("select_mode").value; // this is the chat mode
 
@@ -224,6 +244,7 @@ function delete_message() {
     .then(data => {
         alert(data.response);
         const text_area = document.getElementById("text_area").innerHTML = "";
+        text_info.style.display = "block";
     })
 }
 
@@ -974,4 +995,62 @@ for(let i = 0; i < links.length; i++){
     links[i].addEventListener('click', () => {
         navLinks.classList.toggle('hide');
     });
-} 
+}
+
+const qa_text = `<li>Answer your questions
+<li>Generate text
+<li>Translate languages
+<li>Summarize text
+<li>Write different types of creative content
+<li>Generate code
+<li>Write different types of professional content`;
+
+const doctor_text = `<li>Answer your medical questions
+<li>Provide information about medical conditions
+<li>Help you find a doctor or specialist
+<li>Provide medication information
+<li>Help you manage your health`
+
+const friend_text = `<li>Make Conversation
+<li>Ask for advice
+<li>Talk about Movies, Games, Shows etc`
+
+const therapist_text = `<li>Help you to identify and understand the root of your problems.
+<li>Develop coping mechanisms for dealing with stress, anxiety, depression etc.
+<li>Improve your communication and interpersonal skills.
+<li>Build a stronger sense of self-esteem and confidence.
+<li>Achieve your goals and live a more fulfilling life.`
+
+const alien_text = `<li>Provide Entertainment
+<li>Answer questions about space
+<li>Answer questions about myself as an alien`
+
+const dmc_text = `<li>Admissions
+<li>Courses
+<li>Scholarships
+<li>Student Life`
+
+function text_info_generator() {
+    const text_info = document.getElementById("text_info");
+    text_info.innerHTML += "Hello, " + "<div class = 'text_name'>" + sessionStorage.getItem('user_name') + "</div>";
+    text_info.innerHTML += "<br>Current mode: "+mode.value;
+    text_info.innerHTML += "<br>Here is how i can help:";
+    if (mode.value == "Question Answer") {
+        text_info.innerHTML += qa_text;
+    }   else
+    if (mode.value == "Doctor") {
+        text_info.innerHTML += doctor_text;
+    }   else
+    if (mode.value == "Friend") {
+        text_info.innerHTML += friend_text;
+    }   else
+    if (mode.value == "Therapist") {
+        text_info.innerHTML += therapist_text;
+    }   else
+    if (mode.value == "Alien") {
+        text_info.innerHTML += alien_text;
+    }   else
+    if (mode.value == "DMC") {
+        text_info.innerHTML += dmc_text;
+    }
+}

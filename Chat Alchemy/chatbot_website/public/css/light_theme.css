@@ -692,6 +692,31 @@ nav {
     overflow: auto;
 }
 
+.text_name {
+    background-image: linear-gradient(to right, blue, purple,  red);
+    background-size: 40%;
+    background-clip: text;
+    background-repeat:space-evenly;
+    -webkit-text-fill-color: transparent;
+}
+
+.text_info {
+    color: black;
+    background-color: rgb(255, 255, 255, 0);
+
+    font-size: calc(1.8vh + 1.8vw);
+    text-align: left;
+
+    padding: 40px;
+
+    height: 77vh;
+    width: 78vw;
+
+    border-radius: 15px;
+
+    overflow:hidden;
+}
+
 .text_image {
     border-radius: 10px;
 
@@ -1168,11 +1193,11 @@ nav {
     grid-column-end: 1;
 
     color:black;
-    background-color: red;
+    background-color: rgb(255, 60, 60);
 
     font-size: calc(0.7vh + 0.7vw);
 
-    border: 2px solid red;
+    border: 2px solid black;
     border-radius: 10px;
 
     margin:0 auto;
@@ -1185,8 +1210,9 @@ nav {
 
 .sign_out_btn:hover {
     color:black;
-    background-color: red;
-    border: 2px solid red;
+    background-color: rgb(255, 60, 60);
+
+    border: 2px solid black;
 
     transition: 0.3s;
     letter-spacing: 2px;
@@ -1533,11 +1559,11 @@ nav {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
 }
   
 ::-webkit-scrollbar-track {
-    background: orangered;
+    background: lightgreen;
     border-radius: 4px;
 }
 
