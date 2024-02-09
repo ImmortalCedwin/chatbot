@@ -251,11 +251,20 @@ function set_typing_to_type() {
             sessionStorage.setItem("typing_mode", String(data.typing_mode));
         })
         const type = document.getElementById("typing_btn");
-        type.style.backgroundColor = "white";
-        type.style.color = "black";
         const block = document.getElementById("block_btn");
-        block.style.backgroundColor = "black";
-        block.style.color = "white";
+
+        if (sessionStorage.getItem("theme") == "Light") {
+            type.style.backgroundColor = "black";
+            type.style.color = "white";
+            block.style.backgroundColor = "white";
+            block.style.color = "black";    
+        }   else    {
+            type.style.backgroundColor = "white";
+            type.style.color = "black";
+            block.style.backgroundColor = "black";
+            block.style.color = "white";
+        }
+        
     }
 }
 
@@ -278,11 +287,21 @@ function set_typing_to_block() {
             sessionStorage.setItem("typing_mode", String(data.typing_mode));
         })
         const block = document.getElementById("block_btn");
-        block.style.backgroundColor = "white";
-        block.style.color = "black";
         const type = document.getElementById("typing_btn");
-        type.style.backgroundColor = "black";
-        type.style.color = "white";
+
+        if(sessionStorage.getItem("theme") == "Light") {
+            block.style.backgroundColor = "black";
+            block.style.color = "white";
+            type.style.backgroundColor = "white";
+            type.style.color = "black";
+        }   else    {
+            block.style.backgroundColor = "white";
+            block.style.color = "black";
+            type.style.backgroundColor = "black";
+            type.style.color = "white";
+        }
+
+        
     }
 }
 
@@ -298,8 +317,8 @@ function update_theme(new_theme) {
     .then(response => response.json())
     .then(data => {
         sessionStorage.setItem("theme", String(data.theme));
+        display_settings();
     })
-
 }
 
 function translate() {
@@ -499,20 +518,51 @@ function display_settings() {
     .then(response => response.json())
     .then(data => {
         sessionStorage.setItem("typing_mode", String(data.typing_mode))
-        if (sessionStorage.getItem("typing_mode") == "type") {
-            const type = document.getElementById("typing_btn");
+
+        const block = document.getElementById("block_btn");
+        const type = document.getElementById("typing_btn");
+
+        if (sessionStorage.getItem("typing_mode") == "type" && sessionStorage.getItem("theme") == "Default") {
+            
             type.style.backgroundColor = "white";
             type.style.color = "black";
-        }   else    {
-            const block = document.getElementById("block_btn");
+
+            block.style.backgroundColor = "black";
+            block.style.color = "white";
+
+        }   else
+        if (sessionStorage.getItem("typing_mode") == "block" && sessionStorage.getItem("theme") == "Default") {
+
             block.style.backgroundColor = "white";
             block.style.color = "black";
+
+            type.style.backgroundColor = "black";
+            type.style.color = "white";
+
+        }   else
+        if (sessionStorage.getItem("typing_mode") == "type" && sessionStorage.getItem("theme") == "Light") {
+            
+            type.style.backgroundColor = "black";
+            type.style.color = "white";
+
+            block.style.backgroundColor = "white";
+            block.style.color = "black";
+
+        }   else
+        if (sessionStorage.getItem("typing_mode") == "block" && sessionStorage.getItem("theme") == "Light") {
+
+            block.style.backgroundColor = "black";
+            block.style.color = "white";
+            
+            type.style.backgroundColor = "white";
+            type.style.color = "black";
+
         }
+
     })
 
-    var theme = sessionStorage.getItem("theme");
     const theme_select = document.getElementById("select_theme");
-    theme_select.value = theme;
+    theme_select.value = sessionStorage.getItem("theme");
 }
 
 function sign_out() {
@@ -537,8 +587,18 @@ function sign_out() {
 // buttons mapped to functions when clicked
 
 const send_message_btn = document.getElementById("send_message");
+const user_input_message = document.getElementById("user_input_message");
+
 send_message_btn.addEventListener("click", () => {
-    send_message();
+    if (user_input_message.value != "") {
+        send_message();
+    }
+});
+
+user_input_message.addEventListener("keypress", function(event) {
+    if(event.key === "Enter" && user_input_message.value != "") {
+        send_message();
+    }
 });
 
 const debug_btn = document.getElementById("debug_btn");
@@ -660,12 +720,12 @@ function change_style(theme) {
 const style_sheet = document.getElementById("select_theme")
 style_sheet.addEventListener("change", () => {
     if (style_sheet.value == "Light") {
-        change_style("css/light_theme.css")
-        update_theme("Light")
+        change_style("css/light_theme.css");
+        update_theme("Light");
     }   else
     if (style_sheet.value == "Default") {
         change_style("css/chat_alchemy.css");
-        update_theme("Default")
+        update_theme("Default");
     }
 })
 
@@ -898,14 +958,6 @@ var select_mode_mobile = document.getElementById("select_mode_mobile");
 select_mode_mobile.addEventListener("click", () => {
     display_chat();
 })
-
-const user_input_message = document.getElementById("user_input_message");
-
-user_input_message.addEventListener("keypress", function(event) {
-    if(event.key === "Enter" && user_input_message.value != "") {
-        send_message();
-    }
-});
 
 let hamburger = document.querySelector('.hamburger');
 let navLinks = document.getElementById('nav-links');
