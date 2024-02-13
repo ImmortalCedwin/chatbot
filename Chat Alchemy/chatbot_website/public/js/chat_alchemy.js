@@ -455,6 +455,21 @@ function image_recognition(data) {
 
 }
 
+function image_text_copy() {
+    const text = document.getElementById("image_result_text").value;
+
+    if (text == "") {
+        return
+    }
+
+    document.addEventListener("copy", (event) => {
+      event.clipboardData.setData('text/plain', text);
+      event.preventDefault(); 
+      alert("Text Copied !");
+    });
+    document.execCommand("copy");
+}
+
 // display pages by hiding the other pages
 
 function display_chat() {
@@ -744,6 +759,11 @@ translate_btn_mobile.addEventListener("click", () => {
 const image_recognition_btn = document.getElementById("image_recognition_btn");
 image_recognition_btn.addEventListener("click", () => {
     display_image_recognition();
+})
+
+const image_copy = document.getElementById("image_copy");
+image_copy.addEventListener("click", () => {
+    image_text_copy()
 })
 
 var image_data = "";
