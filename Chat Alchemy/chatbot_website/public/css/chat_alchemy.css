@@ -665,6 +665,150 @@ nav {
     border: 3px solid white;
 }
 
+.image_recognition_box {
+     
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    display: grid;
+    grid-template-rows: 90% auto;
+
+    border:3px solid black;
+    border-radius: 15px;
+
+    height: 97vh;
+    width: 83vw;
+
+    float:right;
+    background-color: black;
+
+}
+
+.image_input {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+
+    width: 55vw;
+    height: 83.5vh;
+
+    background-color: rgb(20, 20, 20);
+
+    border: 3px solid white;
+    border-radius: 15px;
+}
+
+.image_insert {
+    padding: 15px;
+
+    color: white;
+    font-size: calc(0.7vh + 0.7vw);
+}
+
+.preview_image {
+
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;  
+
+    border: 1px solid black;
+    border-radius: 5px;
+    
+    height: 80%;
+    width: 80%;
+}
+
+.image_result {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    background-color: black;
+}
+
+.image_result_text {
+    font-size: calc(0.7vh + 0.7vw);
+
+    color: white;
+    background-color: rgb(20, 20, 20);
+
+    border: 3px solid white;
+    border-radius: 15px;
+    outline: none;
+
+    width: 24vw;
+    height: 80vh;
+
+    padding: 15px;
+
+    resize: none;
+}
+
+.image_submit {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    font-size: calc(0.7vh + 0.7vw);
+
+    height: 6vh;
+    width: 55vw;
+
+    color: white;
+    background-color: black;
+    
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.image_submit:hover {
+    color: white;
+    background-color: black;
+    border: 3px solid white;
+}
+
+.image_copy {
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    font-size: calc(0.7vh + 0.7vw);
+
+    height: 6vh;
+    width: 25vw;
+
+    color: white;
+    background-color: black;
+    
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    margin: 15px;
+    margin-left: 20px;
+}
+
+.image_copy:hover {
+    color: white;
+    background-color: black;
+    border: 3px solid white;
+}
+
 .text_area {
     grid-row-start: 1;
     grid-row-end: 1;
@@ -962,9 +1106,9 @@ nav {
     grid-column-end: 1;
 
     height: 5vh;
-    width: 12vw;
+    width: 15vw;
 
-    font-size: calc(1.1vh + 1.1vw);
+    font-size: calc(1.3vh + 1.3vw);
 
     color:orangered;
 
@@ -1055,7 +1199,7 @@ nav {
 
     display: grid;
 
-    height: 40vh;
+    height: 45vh;
     width: inherit;
 
     border-radius: 20px;
@@ -1163,6 +1307,37 @@ nav {
 }
 
 .translate_btn:hover {
+    color:black;
+    background-color: white;
+    border: 2px solid white;
+
+    transition: 0.3s;
+    letter-spacing: 2px;
+}
+
+.image_recognition_btn {
+    grid-row-start: 5;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    color:white;
+    background-color: black;
+
+    font-size: calc(0.7vh + 0.7vw);
+
+    border: 2px solid white;
+    border-radius: 20px;
+
+    margin:0 auto;
+    margin-top:10px;
+    margin-bottom: 10px;
+    
+    height: 7vh;
+    width: 12vw;
+}
+
+.image_recognition_btn:hover {
     color:black;
     background-color: white;
     border: 2px solid white;

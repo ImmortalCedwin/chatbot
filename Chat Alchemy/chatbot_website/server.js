@@ -5,7 +5,13 @@ const converter = new showdown.Converter();     // this is to convert markup to 
 const { markdownToTxt } = require('markdown-to-txt');
 
 const express = require("express");
+const body_parser = require("body-parser");
+const multer = require("multer");
+
 const app = express();
+app.use(body_parser.json({limit:"50mb"}));
+app.use(body_parser.urlencoded({limit:"50mb", extended:true}));
+const upload = multer({dest:"SendImage/"});
 
 // Firebase Code for database
 const { Timestamp, FieldValue } = require("firebase-admin/firestore");
@@ -54,9 +60,11 @@ const ai = require('./public/js/ai_resource.js');
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold,} = require("@google/generative-ai");
 const { GoogleAuth } = require("google-auth-library");
 
-const MODEL_NAME = "gemini-pro";
-const API_KEY = "AIzaSyDnjaNLtw9PwIIKDNaqd0BpqS9KLla3LpI";
+const fs = require("fs");
 
+const MODEL_NAME = "gemini-pro";
+const MODEL_NAME_VISION = "gemini-pro-vision";
+const API_KEY = "AIzaSyDnjaNLtw9PwIIKDNaqd0BpqS9KLla3LpI";
 
 var mode = "Question Answer";
 var current_mode = mode;
@@ -318,6 +326,47 @@ async function translate_text(lang_1,lang_2,text) {
     return run();
 }
 
+async function image_recognition(image_data) {
+
+    async function run() {
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: MODEL_NAME_VISION });
+
+        const generationConfig = {
+            temperature: 0.3,
+            topK: 32,
+            topP: 1,
+            maxOutputTokens: 4096,
+        };
+
+        const safetySettings = ai.safety_settings;
+
+        const parts = [
+            {text: "give me information about this image:\n\n"},
+            {
+                inlineData: {
+                    mimeType: "image/jpeg",
+                    data: Buffer.from(fs.readFileSync(image_data)).toString("base64")
+                }
+            },
+            {text: "\n"},
+        ];
+
+        const result = await model.generateContent({
+            contents: [{ role: "user", parts }],
+            generationConfig,
+            safetySettings,
+        });
+
+        const response = result.response;
+
+        const translated_text = markdownToTxt(response.text())
+
+        return translated_text;
+    }
+    return await run();
+}
+
 async function add_user_to_database_google(username,email,provider) {
 
     const user_ref = db.collection("Users").doc(username);
@@ -546,6 +595,24 @@ app.post("/Translate", async (req,res) => {
     
     res.json({translated_text});
     
+})
+
+app.post("/SendImage", upload.single("image"), async (req,res) => {
+
+    const image_data = req.file.path;
+
+    const image_result = await image_recognition(image_data);
+
+    try {
+        fs.unlinkSync(image_data);
+      
+        console.log("Delete File successfully.");
+      } catch (error) {
+        console.log(error);
+      }
+
+    res.json({image_result});
+
 })
 
 app.post("/AuthenticateUserGoogle", (req,res) => {

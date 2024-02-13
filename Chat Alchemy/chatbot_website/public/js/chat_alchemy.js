@@ -44,10 +44,12 @@ function load_home_page() {
     const email_box = document.getElementById("email_box");
     const translate_box = document.getElementById("translate_box");
     const settings_box = document.getElementById("settings_box");
+    const image_box = document.getElementById("image_recognition_box");
 
     debug_box.style.display = "none";
     email_box.style.display = "none";
-    translate_box.style.display = "none"
+    translate_box.style.display = "none";
+    image_box.style.display = "none";
     settings_box.style.display = "none";
 }
 
@@ -392,16 +394,16 @@ function debug() {
 
     const code = document.getElementById("debug_code_text").value;
 
-    document.getElementById("debug_solution_text").innerHTML = "Processing..."
+    document.getElementById("debug_solution_text").innerHTML = "Processing...";
 
     if (code == "") {
         return
     }
 
     fetch("/SendCode", {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({debug_code:code}),
     })
@@ -434,6 +436,25 @@ function copy() {
     document.execCommand("copy");
 }
 
+function image_recognition(data) {
+
+    document.getElementById("image_result_text").innerHTML = "Processing...";
+
+    const form_data = new FormData();
+    form_data.append("image",data)
+
+    fetch("/SendImage", {
+        method: "POST",
+        body: form_data
+    })
+    .then(response => response.json())
+    .then(data => {
+        const result = document.getElementById("image_result_text");
+        result.innerHTML = data.image_result;
+    })
+
+}
+
 // display pages by hiding the other pages
 
 function display_chat() {
@@ -446,6 +467,9 @@ function display_chat() {
 
     const translate_box = document.getElementById("translate_box");
     translate_box.style.display = "none";
+
+    const image_box = document.getElementById("image_recognition_box");
+    image_box.style.display = "none";
 
     const settings_box = document.getElementById("settings_box");
     settings_box.style.display = "none";
@@ -466,6 +490,9 @@ function display_debug() {
     const translate_box = document.getElementById("translate_box");
     translate_box.style.display = "none";
 
+    const image_box = document.getElementById("image_recognition_box");
+    image_box.style.display = "none";
+
     const settings_box = document.getElementById("settings_box");
     settings_box.style.display = "none";
 
@@ -484,6 +511,9 @@ function display_email_generator() {
 
     const translate_box = document.getElementById("translate_box");
     translate_box.style.display = "none";
+
+    const image_box = document.getElementById("image_recognition_box");
+    image_box.style.display = "none";
 
     const settings_box = document.getElementById("settings_box");
     settings_box.style.display = "none";
@@ -504,6 +534,9 @@ function display_translation() {
     const email_box = document.getElementById("email_box");
     email_box.style.display = "none";
 
+    const image_box = document.getElementById("image_recognition_box");
+    image_box.style.display = "none";
+
     const settings_box = document.getElementById("settings_box");
     settings_box.style.display = "none";
 
@@ -511,6 +544,29 @@ function display_translation() {
     translate_box.style.display = "grid";
     
 }
+
+function display_image_recognition() {
+
+    const chat_box = document.getElementById("chat_box");
+    chat_box.style.display = "none";
+
+    const debug_box = document.getElementById("debug_box");
+    debug_box.style.display = "none";
+
+    const email_box = document.getElementById("email_box");
+    email_box.style.display = "none";
+
+    const translate_box = document.getElementById("translate_box");
+    translate_box.style.display = "none";
+
+    const settings_box = document.getElementById("settings_box");
+    settings_box.style.display = "none";
+
+    const image_box = document.getElementById("image_recognition_box");
+    image_box.style.display = "grid";
+    
+}
+
 
 function display_settings() {
 
@@ -525,6 +581,9 @@ function display_settings() {
 
     const translate_box = document.getElementById("translate_box");
     translate_box.style.display = "none";
+
+    const image_box = document.getElementById("image_recognition_box");
+    image_box.style.display = "none";
 
     const settings_box = document.getElementById("settings_box");
     settings_box.style.display = "grid";
@@ -674,12 +733,44 @@ email_generator_btn_mobile.addEventListener("click", () => {
 
 const translate_btn = document.getElementById("translate_btn");
 translate_btn.addEventListener("click", () => {
-    display_translation()
+    display_translation();
 })
 
 const translate_btn_mobile = document.getElementById("translate_btn_mobile");
 translate_btn_mobile.addEventListener("click", () => {
-    display_translation()
+    display_translation();
+})
+
+const image_recognition_btn = document.getElementById("image_recognition_btn");
+image_recognition_btn.addEventListener("click", () => {
+    display_image_recognition();
+})
+
+var image_data = "";
+const image_insert = document.getElementById("image_insert");
+const preview_image = document.getElementById("preview_image");
+image_insert.addEventListener("change", async () => {
+    const file = event.target.files[0];
+    if (file) {
+        preview_image.src = URL.createObjectURL(file);
+
+        const reader = new FileReader();
+        const result = await new Promise((resolve, reject) => {
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+
+        image_data = file;
+    }
+})
+
+const image_submit = document.getElementById("image_submit");
+image_submit.addEventListener("click", () => {
+    // if (image_data == "") {
+    //     return
+    // }
+    image_recognition(image_data);
 })
 
 const sign_out_btn = document.getElementById("sign_out_btn");
