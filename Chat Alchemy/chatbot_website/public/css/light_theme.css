@@ -42,7 +42,7 @@ nav {
 
 #title_mobile{
     display: flex;
-    color: white;
+    color: black;
     align-items: center;
     margin-left: 7px;
 
@@ -854,6 +854,7 @@ nav {
     text-align: left;
 
     padding: 40px;
+    padding-top: 20px;
 
     height: 77vh;
     width: 78vw;
@@ -969,12 +970,9 @@ nav {
 }
 
 .settings_content {
-    grid-row-start: 1;
-    grid-row-end: 1;
-    grid-column-start: 1;
-    grid-column-end: 1;
-
     grid-template-rows: 10%;
+
+    grid-template-columns: 20% 40% 40%;
 
     display: grid;
 
@@ -1072,7 +1070,7 @@ nav {
 
     font-size: calc(0.7vh + 0.7vw);
 
-    width: 30vw;
+    width: 32vw;
     height: 6vh;
 
     color: black;
@@ -1523,17 +1521,18 @@ nav {
         grid-column: 1; /* Reset grid-column for menu and side_bar on smaller screens */
     }
 
-    .chat_box, .debug_box, .email_box, .translate_box, .settings_box {
+    .chat_box, .debug_box, .email_box, .translate_box, .image_recognition_box, .settings_box {
         grid-column-start: 1;
         grid-column-end: 2;
         width: 100%;
         box-sizing: border-box;
-
-        border:5px solid black;
-        border-radius: 15px;
     
         height: 98vh;
 
+    }
+
+    .text_name {
+        background-size: 70%;
     }
     
     .background {
@@ -1552,10 +1551,9 @@ nav {
         cursor: pointer;
     }
 
-    
     .lines {
         display: block;
-        background-color: rgb(246, 2, 2);
+        background-color: rgb(255, 40, 40);
         height: 3px;
         width: 36px;
         border-radius: 3px;
@@ -1573,9 +1571,7 @@ nav {
         position: relative;
         z-index: 1000;
     
-        background: linear-gradient(to right, rgba(41, 50, 65, 0.98), rgba(28, 31, 43, 0.98));
-    
-        background-color: #191e24f5;
+        background: linear-gradient(to left, rgb(75, 75, 75), rgb(200, 200, 200));
     
         display: flex;
     
@@ -1598,14 +1594,14 @@ nav {
         position: absolute;
         top: -400px;
         right: 0;
-        background-color: #f1c40f;
+        background-color: white;
         padding: 35px 0;
         border-radius: 0 0 20px 20px;
         box-shadow: 0px 5px 5px rgba(128, 128, 128, 0.363);
     }
 
     #nav-links li a {
-        color: rgba(12, 11, 11, 0.836);
+        color: black;
         font-weight: bold;
     }
 
@@ -1654,6 +1650,11 @@ nav {
         width: 95%;
     }
 
+    .email_submit_btn {
+        width: 15vw;
+        height: 8vh;
+    }
+
     .user_input {
        margin-top: 0;
        margin-left: 0;
@@ -1667,10 +1668,14 @@ nav {
 
 
     #user_input_message {
-        font-size: calc(1.5vh + 1vw);
+        color: black;
+        background-color: white;
+
+        font-family: "Cascadia Code";
+        font-size: calc(0.8vh + 0.8vw);
     
-        border: 3px solid black;
-        border-radius: 15px;
+        border: none;
+        border-bottom: 3px solid black;
     
         height: 100%;
         width: 100%;
@@ -1679,6 +1684,11 @@ nav {
         padding:10px;
         float:left;
         outline: none;
+    }
+
+    #user_input_message:focus {
+        transition: 0.8s;
+        border-bottom: 3px dotted black;
     }
     
     .send_message {
@@ -1690,7 +1700,7 @@ nav {
         width: 10%;
         box-sizing: border-box;
     
-        border: 3px solid white;
+        border: 3px solid black;
         border-radius: 10px;
         text-align: center;
 
@@ -1698,9 +1708,9 @@ nav {
     }
     
     .send_message:hover {
-        color:black;
-        background-color: white;
-        border: 2px solid white;
+        color:white;
+        background-color: black;
+        border: 2px solid black;
     }
     
     .user_image_google {

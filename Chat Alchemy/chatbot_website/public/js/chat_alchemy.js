@@ -761,6 +761,11 @@ image_recognition_btn.addEventListener("click", () => {
     display_image_recognition();
 })
 
+const image_recognition_btn_mobile = document.getElementById("image_recognition_mobile");
+image_recognition_btn_mobile.addEventListener("click", () => {
+    display_image_recognition();
+})
+
 const image_copy = document.getElementById("image_copy");
 image_copy.addEventListener("click", () => {
     image_text_copy()
@@ -1129,8 +1134,7 @@ const friend_text = `<li>Make Conversation
 const therapist_text = `<li>Help you to identify and understand the root of your problems.
 <li>Develop coping mechanisms for dealing with stress, anxiety, depression etc.
 <li>Improve your communication and interpersonal skills.
-<li>Build a stronger sense of self-esteem and confidence.
-<li>Achieve your goals and live a more fulfilling life.`
+<li>Build a stronger sense of self-esteem and confidence.`
 
 const alien_text = `<li>Provide Entertainment
 <li>Answer questions about space
