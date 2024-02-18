@@ -9,8 +9,6 @@ const body_parser = require("body-parser");
 const multer = require("multer");
 
 const app = express();
-app.use(body_parser.json({limit:"50mb"}));
-app.use(body_parser.urlencoded({limit:"50mb", extended:true}));
 const upload = multer({dest:"SendImage/"});
 
 // Firebase Code for database
@@ -62,8 +60,8 @@ const { GoogleAuth } = require("google-auth-library");
 
 const fs = require("fs");
 
-const MODEL_NAME = "gemini-pro";
-const MODEL_NAME_VISION = "gemini-pro-vision";
+const MODEL_NAME = "gemini-1.0-pro";
+const MODEL_NAME_VISION = "gemini-1.0-pro-vision-latest";
 const API_KEY = "AIzaSyDnjaNLtw9PwIIKDNaqd0BpqS9KLla3LpI";
 
 var mode = "Question Answer";
@@ -605,7 +603,6 @@ app.post("/SendImage", upload.single("image"), async (req,res) => {
 
     try {
         fs.unlinkSync(image_data);
-      
         console.log("Delete File successfully.");
       } catch (error) {
         console.log(error);

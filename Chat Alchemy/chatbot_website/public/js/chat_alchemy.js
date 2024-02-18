@@ -438,6 +438,11 @@ function copy() {
 
 function image_recognition(data) {
 
+    if (data.size > 4000000) {
+        alert("Image size cannot exceed 4 MB !");
+        return
+    }
+
     document.getElementById("image_result_text").innerHTML = "Processing...";
 
     const form_data = new FormData();
@@ -785,16 +790,16 @@ image_insert.addEventListener("change", async () => {
             reader.onerror = reject;
             reader.readAsDataURL(file);
         });
-
+        
         image_data = file;
     }
 })
 
 const image_submit = document.getElementById("image_submit");
 image_submit.addEventListener("click", () => {
-    // if (image_data == "") {
-    //     return
-    // }
+    if (image_data == "") {
+        return
+    }
     image_recognition(image_data);
 })
 
