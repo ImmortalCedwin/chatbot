@@ -1508,6 +1508,10 @@ nav {
         height: 98vh;
 
     }
+
+    .text_name {
+        background-size: 70%;
+    }
     
     .background {
         grid-template-columns: 100%; /* Adjust the grid template columns for full width */
