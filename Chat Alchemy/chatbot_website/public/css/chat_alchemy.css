@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: "Cascadia Code";
-    background-color: black;
+    background-color: rgb(10, 10, 10);
 }
 
 nav {
@@ -93,7 +93,7 @@ nav {
     width: 83vw;
 
     float:right;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 }
 
 /* i need to use this container for the span to work */
@@ -251,7 +251,7 @@ nav {
     width: 83vw;
 
     float:right;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 }
 
 .email_prompt_box {
@@ -399,7 +399,9 @@ nav {
 
     margin-top: 1%;
 
-    background-color: black;
+    border-radius: 10px;
+
+    background-color: rgb(20, 20, 20);
 }
 
 .email_result {
@@ -470,7 +472,7 @@ nav {
     width: 83vw;
 
     float:right;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 }
 
 .language_select_1 {
@@ -678,7 +680,7 @@ nav {
     width: 83vw;
 
     float:right;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 
 }
 
@@ -1084,7 +1086,7 @@ nav {
 .menu {
     display: grid;
 
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 
     height: inherit;
     width: inherit;
@@ -1127,7 +1129,7 @@ nav {
     font-size: calc(0.8vh + 0.8vw);
 
     color:white;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 
     text-align: center; 
 
@@ -1145,7 +1147,7 @@ nav {
     width: 10vw;
 
     color: white;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 
     font-size: calc(0.7vh + 0.7vw);
 
@@ -1199,7 +1201,7 @@ nav {
 
     border-radius: 20px;
 
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(40, 40, 40);
 
     text-align: center;
 }
